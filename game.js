@@ -68,11 +68,13 @@ if (btnAuthToggle) {
 // Definimos la base de la API en producción
 const baseUrl = "https://sensed-production.up.railway.app/api/auth";
 
-// Asumo que tienes estas variables definidas arriba en tu código:
-// const btnAuthSubmit = document.getElementById('btn-auth-submit');
-// const authUsernameInput = document.getElementById('auth-username');
-// const authPasswordInput = document.getElementById('auth-password');
-// let isLoginMode = true; // O como gestiones tu modo de login
+// Asumimos que los elementos del DOM existen
+const btnAuthSubmit = document.getElementById('btn-auth-submit');
+const authUsernameInput = document.getElementById('auth-username');
+const authPasswordInput = document.getElementById('auth-password');
+
+// Asegúrate de que esta variable esté definida globalmente según tu lógica
+// let isLoginMode = true; 
 
 if (btnAuthSubmit) {
     btnAuthSubmit.addEventListener('click', async (e) => {
@@ -113,17 +115,21 @@ if (btnAuthSubmit) {
                 console.log("¡Login exitoso!", data);
                 alert("¡Bienvenido a Sensed!"); 
                 
-                // --- CAMBIO DE PANTALLA ---
-                // Ocultamos el login
+                // --- NAVEGACIÓN ---
                 const loginScreen = document.getElementById('screen-auth');
-                if (loginScreen) loginScreen.style.display = 'none';
-                
-                // Mostramos el juego (asegúrate de que este ID existe en tu HTML)
+                // CAMBIA 'game-container' por el ID exacto que tenga tu div del juego en el index.html
                 const gameContainer = document.getElementById('game-container'); 
+                
+                if (loginScreen) {
+                    loginScreen.style.display = 'none';
+                    console.log("Login ocultado");
+                }
+                
                 if (gameContainer) {
                     gameContainer.style.display = 'block';
+                    console.log("Juego mostrado");
                 } else {
-                    console.warn("No encuentro el contenedor del juego con id='game-container'");
+                    console.error("ERROR: No encuentro el contenedor del juego. Verifica el ID en tu HTML.");
                 }
 
             } else {
@@ -133,7 +139,7 @@ if (btnAuthSubmit) {
 
         } catch (error) {
             console.error("Fallo de red:", error);
-            alert("No se pudo conectar con el servidor. Revisa tu conexión o espera a que Railway termine de arrancar.");
+            alert("No se pudo conectar con el servidor.");
         }
     });
 }
