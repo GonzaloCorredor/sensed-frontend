@@ -197,7 +197,6 @@ if (btnStartColor) {
 }
 
 function showNextColorMemorize() {
-    addPoints('color', pointsWon);
     const idx = state.currentColorIndex;
     if (idx >= state.colors.length) { showColorFinal(); return; }
     
