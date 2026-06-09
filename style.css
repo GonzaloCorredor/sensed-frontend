@@ -34,7 +34,7 @@ body {
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }
-
+ 
 /* Bloqueo de zoom por doble toque en móviles */
 button, 
 .btn-start, 
@@ -42,7 +42,7 @@ button,
 input[type="range"] {
   touch-action: manipulation;
 }
-
+ 
 /* ===== NAV ===== */
 .nav {
   display: flex;
@@ -193,7 +193,7 @@ input[type="range"] {
   color: var(--text2);
   font-weight: 700;
 }
-
+ 
 .timer-bar-wrap {
   width: 100%; height: 4px; background: var(--bg3); border-radius: 999px; overflow: hidden;
 }
@@ -250,7 +250,7 @@ input[type="range"]::-webkit-slider-thumb {
   border-radius: var(--radius-sm);
   overflow: hidden;
 }
-
+ 
 @media (max-width: 768px) {
   .ad-slot { max-width: 100%; }
 }
@@ -262,8 +262,8 @@ input[type="range"]::-webkit-slider-thumb {
   transition: all 0.4s cubic-bezier(.34,1.56,.64,1); pointer-events: none; z-index: 9999; text-align: center;
 }
 .toast.show { transform: translate(-50%, 0); opacity: 1; visibility: visible; }
-
-
+ 
+ 
 /* ============================================================
    ADAPTACIÓN PARA DISPOSITIVOS MÓVILES (RESPONSIVE)
    ============================================================ */
@@ -275,15 +275,15 @@ input[type="range"]::-webkit-slider-thumb {
   .screen { padding: 1.5rem 1rem; }
   .home-title { font-size: 2.2rem; }
   .profile-card { max-width: 100%; }
-
+ 
   .result-compare { gap: 1rem; }
   .result-swatch { width: 80px; height: 80px; }
   .color-display { width: 250px; height: 250px; }
-
+ 
   .toast { width: 90%; font-size: 1.1rem; padding: 1rem; }
   #btn-time-action, #btn-fish-action { height: 120px; }
 }
-
+ 
 /* ===== ZONAS DE ANUNCIOS ===== */
 .ad-safe-zone {
   width: 100%;
@@ -295,7 +295,7 @@ input[type="range"]::-webkit-slider-thumb {
   justify-content: center;
   align-items: center;
 }
-
+ 
 /* ===== TEXTO SEO PARA GOOGLE ===== */
 .seo-text {
   color: var(--text3);
@@ -310,7 +310,7 @@ input[type="range"]::-webkit-slider-thumb {
   color: var(--text2);
   font-weight: normal;
 }
-
+ 
 /* --- REGRESO AL MODO MÓVIL --- */
 @media (max-width: 768px) {
     body {
@@ -330,5 +330,4 @@ input[type="range"]::-webkit-slider-thumb {
         flex-wrap: wrap; /* Si no caben, bajan a la siguiente fila */
     }
 }
-
-
+ 
