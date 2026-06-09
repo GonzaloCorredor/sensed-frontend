@@ -78,7 +78,7 @@ let isLoginMode = true;
 
 if (btnAuthSubmit) {
     btnAuthSubmit.addEventListener('click', async (e) => {
-        e.preventDefault(); 
+        e.preventDefault();
 
         const username = authUsernameInput.value.trim();
         const password = authPasswordInput.value.trim();
@@ -88,58 +88,36 @@ if (btnAuthSubmit) {
             return;
         }
 
+        // Elegimos si mandamos los datos a login o a registro
         const endpoint = isLoginMode ? `${baseUrl}/login` : `${baseUrl}/registro`;
 
         try {
             const response = await fetch(endpoint, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
+                    'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({
-                    username: username,
-                    password: password
-                })
+                body: JSON.stringify({ username, password })
             });
 
-            if (!response.ok) {
-                const errorData = await response.json();
-                alert("Error: " + (errorData.error || "Algo ha fallado en el servidor"));
-                return;
-            }
-
-            const data = await response.json();
-            
-            if (isLoginMode) {
-                console.log("¡Login exitoso!", data);
-                alert("¡Bienvenido a Sensed!"); 
+            if (response.ok) {
+                // ¡AQUÍ ESTÁ LA MAGIA VISUAL!
                 
-                // --- NAVEGACIÓN ---
-                const loginScreen = document.getElementById('screen-auth');
-                // CAMBIA 'game-container' por el ID exacto que tenga tu div del juego en el index.html
-                const gameContainer = document.getElementById('game-container'); 
+                // 1. Ocultamos la pantalla de Login
+                document.getElementById('screen-auth').classList.remove('active');
                 
-                if (loginScreen) {
-                    loginScreen.style.display = 'none';
-                    console.log("Login ocultado");
-                }
+                // 2. Mostramos la pantalla principal (Juego de Color)
+                document.getElementById('screen-home').classList.add('active');
                 
-                if (gameContainer) {
-                    gameContainer.style.display = 'block';
-                    console.log("Juego mostrado");
-                } else {
-                    console.error("ERROR: No encuentro el contenedor del juego. Verifica el ID en tu HTML.");
-                }
-
+                // 3. ¡Hacemos aparecer la barra de navegación de golpe!
+                document.getElementById('main-nav').style.display = 'flex';
+                
             } else {
-                console.log("¡Registro exitoso!", data);
-                alert("¡Cuenta creada! Ya puedes iniciar sesión.");
+                alert("Usuario o contraseña incorrectos. Inténtalo de nuevo.");
             }
-
         } catch (error) {
-            console.error("Fallo de red:", error);
-            alert("No se pudo conectar con el servidor.");
+            console.error("Error de conexión:", error);
+            alert("Error al conectar con el servidor de Railway.");
         }
     });
 }
