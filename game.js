@@ -74,7 +74,7 @@ const authUsernameInput = document.getElementById('auth-username');
 const authPasswordInput = document.getElementById('auth-password');
 
 // Asegúrate de que esta variable esté definida globalmente según tu lógica
-// let isLoginMode = true; 
+let isLoginMode = true; 
 
 if (btnAuthSubmit) {
     btnAuthSubmit.addEventListener('click', async (e) => {
