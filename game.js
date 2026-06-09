@@ -23,7 +23,10 @@ function addPoints(mode, points) {
 function updateScoreUI(mode) {
     const scoreElement = document.getElementById('nav-score');
     if (scoreElement) {
-        scoreElement.innerText = `${gameScores[mode]} pts`;
+        let score = gameScores[mode] || 0;
+        // Si es el modo color, muestra 1 decimal (ej: 7.5). Si es otro, muestra el entero (ej: 20)
+        let displayScore = (mode === 'color') ? score.toFixed(1) : Math.round(score);
+        scoreElement.innerText = `${displayScore} pts`;
     }
 }
 
@@ -261,7 +264,7 @@ if (btnColorConfirm) {
         
         state.colorScores.push({ orig, guess, sc }); 
         state.totalColorScore += sc; 
-        updateNavScore(state.totalColorScore * 10);
+        updateNavScore(state.totalColorScore);
         
         $("result-original").style.backgroundColor = hslStr(orig);
         $("result-guess").style.backgroundColor = hslStr(guess);
@@ -282,7 +285,7 @@ if (btnNextColor) {
 
 function showColorFinal() {
     const finalScore = state.totalColorScore * 10;
-    $("final-score-big").textContent = finalScore.toFixed(0);
+    $("final-score-big").textContent = finalScore.toFixed(1);
     $("final-grade").textContent = state.totalColorScore >= 40 ? "Ojo de artista 🎨" : "Buen intento 👍";
     
     const container = $("final-swatches"); 
