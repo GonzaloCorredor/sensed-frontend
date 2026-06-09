@@ -1,78 +1,278 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sensed.gg | Entrenamiento Cognitivo</title>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Sensed",
+  "url": "https://sensed.es",
+  "image": "https://sensed.es/logo.svg"
+}
+</script>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  
+  <title>Sensed, Juegos, Minijuegos, Games, Minigames, Test de Reflejos, Tiempo de Reacción</title>
+  
+  <link rel="icon" type="image/svg+xml" href="logo.svg">
+  
+  <meta name="description" content="Mide tus reflejos, afina tu oído y pon a prueba tu tiempo de reacción con estos minijuegos gratuitos. ¿Podrás conseguir la máxima puntuación?" />
+
+  <meta property="og:title" content="Sensed, Juegos, Minijuegos, Games, Minigames, Test de Reflejos, Tiempo de Reacción" />
+  <meta property="og:description" content="Mide tus reflejos, afina tu oído y pon a prueba tu tiempo de reacción con estos minijuegos gratuitos. ¿Podrás conseguir la máxima puntuación?" />
+  <meta property="og:url" content="https://sensed.es" />
+  <meta property="og:image" content="https://sensed.es/preview.png" />
+  <meta property="og:type" content="website" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Sensed, Juegos, Minijuegos, Games, Minigames, Test de Reflejos, Tiempo de Reacción" />
+  <meta name="twitter:description" content="Mide tus reflejos, afina tu oído y pon a prueba tu tiempo de reacción con estos minijuegos gratuitos. ¿Podrás conseguir la máxima puntuación?" />
+  <meta name="twitter:image" content="https://sensed.es/preview.png" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono&family=DM+Sans:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8996240781633351" crossorigin="anonymous"></script>
 </head>
+
 <body>
 
-    <nav class="nav" id="main-nav" style="display: none;">
-        <a href="#" class="nav-logo" id="nav-logo">SENSED.GG</a>
-        <div class="nav-modes">
-            <button class="nav-btn active" data-mode="color">COLOR</button>
-            <button class="nav-btn" data-mode="sound">SONIDO</button>
-            <button class="nav-btn" data-mode="time">TIEMPO</button>
-            <button class="nav-btn" data-mode="fishing">PESCA</button>
-        </div>
-        <div class="nav-score-display" id="nav-score">0 pts</div>
-    </nav>
+  <section class="screen active" id="screen-auth">
+    <div style="text-align: center; max-width: 350px; margin: 0 auto; margin-top: 10vh;">
+      <div style="font-size: 4rem; margin-bottom: 1rem;">⚡</div>
+      <h1 class="home-title" style="font-size: 2.5rem; margin-bottom: 2rem;">Sensed</h1>
+      
+      <div id="auth-form-container" style="background: var(--bg2); padding: 2rem; border-radius: 12px;">
+        <h2 id="auth-title" style="color: var(--text); margin-bottom: 1.5rem; font-size: 1.2rem;">Iniciar Sesión</h2>
+        
+        <input type="text" id="auth-username" placeholder="Nombre de usuario" style="width: 100%; padding: 1rem; margin-bottom: 1rem; border-radius: 8px; border: 1px solid var(--text3); background: var(--bg); color: var(--text); font-family: var(--font);" />
+        
+        <input type="password" id="auth-password" placeholder="Contraseña" style="width: 100%; padding: 1rem; margin-bottom: 1.5rem; border-radius: 8px; border: 1px solid var(--text3); background: var(--bg); color: var(--text); font-family: var(--font);" />
+        
+        <button class="btn-start" id="btn-auth-submit" style="width: 100%; margin-bottom: 1rem;">ENTRAR</button>
+        
+        <p style="color: var(--text3); font-size: 0.9rem;">
+          <span id="auth-toggle-text">¿No tienes cuenta?</span> 
+          <a href="#" id="btn-auth-toggle" style="color: var(--accent); font-weight: bold; text-decoration: none;">Regístrate</a>
+        </p>
+      </div>
+    </div>
+  </section>
 
-    <main>
-        <section class="screen active" id="screen-auth">
-            <div class="game-content">
-                <h1 class="home-title" id="auth-title">Iniciar Sesión</h1>
-                <input type="text" id="auth-username" placeholder="Usuario" class="btn-start" style="background: var(--bg3); color: white;">
-                <input type="password" id="auth-password" placeholder="Contraseña" class="btn-start" style="background: var(--bg3); color: white;">
-                <button class="btn-start" id="btn-auth-submit">ENTRAR</button>
-                <p style="font-size: 0.9rem; margin-top: 1rem;"><span id="auth-toggle-text">¿No tienes cuenta?</span> <a href="#" id="btn-auth-toggle" style="color: var(--accent);">Regístrate</a></p>
-            </div>
-        </section>
+  <nav class="nav" id="main-nav" style="display: none;">
+    <a href="#" class="nav-logo" id="nav-logo">sensed</a>
+    <div class="nav-modes">
+      <button class="nav-btn active" data-mode="color">color</button>
+      <button class="nav-btn" data-mode="sound">sonido</button>
+      <button class="nav-btn" data-mode="time">tiempo</button>
+      <button class="nav-btn" data-mode="fishing">pesca</button>
+    </div>
+    <div class="nav-score-display" id="nav-score">0 pts</div>
+  </nav>
 
-        <section class="screen" id="screen-home">
-            <div class="game-content">
-                <span class="home-eyebrow">Bienvenido, Gonzalo</span>
-                <h1 class="home-title">Entrena tus sentidos</h1>
-                <p class="home-desc">Desarrolla tu agudeza visual, auditiva y de reflejos con retos diarios.</p>
-                <button class="btn-start" id="btn-start">COMENZAR RETO COLOR</button>
-            </div>
-        </section>
+ <section class="screen" id="screen-home">
+    <div class="home-content">
+      <h1 class="home-title">¿Recuerdas el color?</h1>
+      <button class="btn-start" id="btn-start">empezar</button>
+      
+      <p class="seo-text">
+        Sensed es una colección de <strong>minijuegos gratuitos</strong> diseñados para poner a prueba tu <strong>tiempo de reacción</strong>, <strong>memoria visual</strong> y <strong>percepción auditiva</strong>. Mide tus reflejos, afina tu agudeza y supera tus propios récords.
+      </p>
+    </div>
 
-        <section class="screen" id="screen-color-memorize">
-            <div class="game-content">
-                <div class="round-label">RONDA <span id="color-round-num">1</span>/5</div>
-                <div class="timer-bar-wrap"><div class="timer-bar" id="timer-bar"></div></div>
-                <div class="color-display" id="color-display"></div>
-                <p>Memoriza el color...</p>
-            </div>
-        </section>
+    <div class="ad-safe-zone">
+      <ins class="adsbygoogle"
+           style="display:block; width:100%; height:90px;"
+           data-ad-client="ca-pub-8996240781633351"
+           data-ad-slot="5227166707"
+           data-ad-format="horizontal"
+           data-full-width-responsive="true"></ins>
+      <script>
+           (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </div>
+  </section>
 
-        <section class="screen" id="screen-color-guess">
-            <div class="game-content">
-                <div class="round-label">RONDA <span id="color-guess-num">1</span>/5</div>
-                <div class="color-display" id="color-preview-box"></div>
-                <div class="slider-group">
-                    <label>Tono (H): <span id="val-h">0</span></label>
-                    <input type="range" id="slider-h" min="0" max="360" value="0">
-                </div>
-                <div class="slider-group">
-                    <label>Saturación (S): <span id="val-s">50</span></label>
-                    <input type="range" id="slider-s" min="0" max="100" value="50">
-                </div>
-                <div class="slider-group">
-                    <label>Luz (L): <span id="val-l">50</span></label>
-                    <input type="range" id="slider-l" min="0" max="100" value="50">
-                </div>
-                <button class="btn-start" id="btn-color-confirm">CONFIRMAR</button>
-            </div>
-        </section>
+  <section class="screen" id="screen-color-memorize">
+    <div class="memorize-top">
+      <span class="round-label">RONDA <span id="color-round-num">1</span>/5</span>
+      <div class="timer-bar-wrap"><div class="timer-bar" id="timer-bar"></div></div>
+    </div>
+    <div class="color-display" id="color-display"></div>
+    <p class="memorize-hint">Memoriza este color...</p>
+  </section>
 
-        </main>
+  <section class="screen" id="screen-color-guess">
+    <div class="guess-top">
+      <span class="round-label">RONDA <span id="color-guess-num">1</span>/5</span>
+    </div>
+    <div class="color-display" id="color-preview-box" style="height: 150px; margin-bottom: 2rem;"></div>
+    
+    <div class="slider-group">
+      <label>Tono (H): <span id="val-h">0</span></label>
+      <input type="range" id="slider-h" min="0" max="360" value="0" class="slider" />
+    </div>
+    <div class="slider-group">
+      <label>Saturación (S): <span id="val-s">0</span>%</label>
+      <input type="range" id="slider-s" min="0" max="100" value="0" class="slider" />
+    </div>
+    <div class="slider-group">
+      <label>Luminosidad (L): <span id="val-l">0</span>%</label>
+      <input type="range" id="slider-l" min="0" max="100" value="0" class="slider" />
+    </div>
+    
+    <button class="btn-start" id="btn-color-confirm" style="display: block; margin: 1rem auto 0 auto; width: 100%; max-width: 400px;">CONFIRMAR COLOR</button>
+  </section>
 
-    <div class="toast" id="toast"></div>
+  <section class="screen" id="screen-color-result">
+    <div style="display:flex; gap: 1rem; justify-content: center; margin: 2rem 0;">
+      <div style="text-align:center;">
+        <div id="result-original" style="width:100px; height:100px; border-radius:12px;"></div>
+        <p style="margin-top:0.5rem; color:var(--text3); font-size:0.8rem;">ORIGINAL</p>
+      </div>
+      <div style="text-align:center;">
+        <div id="result-guess" style="width:100px; height:100px; border-radius:12px;"></div>
+        <p style="margin-top:0.5rem; color:var(--text3); font-size:0.8rem;">TUYO</p>
+      </div>
+    </div>
+    <div style="text-align: center;">
+      <div id="result-score-big" style="font-size: 4rem; font-family: var(--mono); font-weight: 700; color: var(--accent);">0.0</div>
+      <p id="result-comment" style="color: var(--text2); font-size: 1.2rem;"></p>
+    </div>
+    <button class="btn-start" id="btn-next-color" style="display: block; margin: 2rem auto 0 auto; width: 100%; max-width: 400px;">SIGUIENTE RONDA</button>
+  </section>
 
-    <script src="game.js"></script>
+  <section class="screen" id="screen-final">
+    <div style="text-align: center; margin: 2rem 0;">
+      <h2 style="color: var(--text3); font-size: 1.2rem;">PUNTUACIÓN FINAL</h2>
+      <div id="final-score-big" style="font-size: 5rem; font-family: var(--mono); font-weight: 700; color: var(--accent);">0.0</div>
+      <p id="final-grade" style="color: var(--text2); font-size: 1.5rem; font-weight: bold;"></p>
+    </div>
+    <div id="final-swatches" style="display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 2rem;"></div>
+    <button class="btn-start" id="btn-play-again" style="display: block; margin: 0 auto; width: 100%; max-width: 400px;">VOLVER AL INICIO</button>
+    
+    <div class="ad-safe-zone">
+      <ins class="adsbygoogle"
+           style="display:block; width:100%; height:90px;"
+           data-ad-client="ca-pub-8996240781633351"
+           data-ad-slot="5227166707"
+           data-ad-format="horizontal"
+           data-full-width-responsive="true"></ins>
+      <script>
+           (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </div>
+  </section>
+
+  <section class="screen" id="screen-sound-home">
+    <div class="home-content">
+      <h1 class="home-title">¿Tienes buen oído?</h1>
+      <button class="btn-start" id="btn-sound-start">empezar</button>
+    </div>
+    
+    <div class="ad-safe-zone">
+      <ins class="adsbygoogle"
+           style="display:block; width:100%; height:90px;"
+           data-ad-client="ca-pub-8996240781633351"
+           data-ad-slot="5227166707"
+           data-ad-format="horizontal"
+           data-full-width-responsive="true"></ins>
+      <script>
+           (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </div>
+  </section>
+
+  <section class="screen" id="screen-sound-game">
+    <div class="memorize-top">
+      <span class="round-label">RONDA <span id="sound-round-num">1</span>/5</span>
+    </div>
+    <div class="sound-instrument-container" style="text-align: center; margin: 2rem 0;">
+      <div id="sound-icon" style="font-size: 4rem;">🥢</div>
+      <h2 id="sound-name" style="margin: 0.5rem 0; color: var(--text);">Diapasón</h2>
+      <p id="sound-desc" style="color: var(--text3); font-size: 0.9rem;">Afina la nota objetivo</p>
+    </div>
+    <button class="btn-start" id="btn-sound-play" style="display: block; margin: 0 auto 2rem auto; width: 100%; max-width: 400px;">ESCUCHAR OBJETIVO</button>
+    <div class="sound-controls">
+      <label>TU AFINACIÓN: <span id="sound-val">440</span> Hz</label>
+      <input type="range" id="slider-hz" min="100" max="1000" value="440" class="slider">
+    </div>
+    <button class="btn-start" id="btn-sound-confirm" style="display: block; margin: 1rem auto 0 auto; width: 100%; max-width: 400px; background: var(--success);">CONFIRMAR AFINACIÓN</button>
+  </section>
+
+  <section class="screen" id="screen-time-home">
+    <div class="home-content">
+      <h1 class="home-title">¿Mides bien el tiempo?</h1>
+      <button class="btn-start" id="btn-time-start">empezar</button>
+    </div>
+    
+    <div class="ad-safe-zone">
+      <ins class="adsbygoogle"
+           style="display:block; width:100%; height:90px;"
+           data-ad-client="ca-pub-8996240781633351"
+           data-ad-slot="5227166707"
+           data-ad-format="horizontal"
+           data-full-width-responsive="true"></ins>
+      <script>
+           (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </div>
+  </section>
+
+  <section class="screen" id="screen-time-game">
+    <div class="memorize-top">
+      <span class="round-label">RONDA <span id="time-round-num">1</span>/5</span>
+    </div>
+    <div style="text-align: center; margin-top: 2rem;">
+      <h2 style="color: var(--text3); font-size: 1rem;">Detén el cronómetro a los:</h2>
+      <div id="time-target" style="font-size: 4rem; font-family: var(--mono); font-weight: 700; color: var(--accent); margin: 1rem 0;">0.00s</div>
+    </div>
+    <button class="btn-start" id="btn-time-action" style="margin: 2rem auto 0 auto; width: 100%; max-width: 400px; height: 120px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.5rem; transition: background 0.1s;">
+      <span id="time-btn-title" style="font-size: 2rem;">EMPEZAR</span>
+      <span id="time-btn-sub" style="font-size: 0.9rem; opacity: 0.8;">Haz clic para iniciar</span>
+    </button>
+    <div id="time-result-text" style="text-align: center; margin-top: 2rem; font-size: 1.2rem; font-weight: 700; min-height: 2rem;"></div>
+  </section>
+
+  <section class="screen" id="screen-fishing-home">
+    <div class="home-content">
+      <h1 class="home-title">Jornada de Pesca</h1>
+      <button class="btn-start" id="btn-fishing-start">empezar</button>
+    </div>
+    
+    <div class="ad-safe-zone">
+      <ins class="adsbygoogle"
+           style="display:block; width:100%; height:90px;"
+           data-ad-client="ca-pub-8996240781633351"
+           data-ad-slot="5227166707"
+           data-ad-format="horizontal"
+           data-full-width-responsive="true"></ins>
+      <script>
+           (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </div>
+  </section>
+
+  <section class="screen" id="screen-fishing-game">
+    <div class="memorize-top">
+      <span class="round-label">LANCE <span id="fishing-round-num">1</span>/5</span>
+    </div>
+    <div style="text-align: center; margin-top: 2rem;">
+      <h2 style="color: var(--text3); font-size: 1rem;">Tiempo de reacción:</h2>
+      <div id="fish-reaction-time" style="font-size: 3rem; font-family: var(--mono); font-weight: 700; color: var(--accent); margin: 1rem 0;">-- ms</div>
+    </div>
+    <button class="btn-start" id="btn-fish-action" style="margin: 2rem auto 0 auto; width: 100%; max-width: 400px; height: 150px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.5rem; background-color: #3b82f6;">
+      <span id="fish-btn-title" style="font-size: 2rem;">LANZAR CAÑA</span>
+      <span id="fish-btn-sub" style="font-size: 0.9rem; opacity: 0.8;">Haz clic para lanzar</span>
+    </button>
+    <div id="fish-result-text" style="text-align: center; margin-top: 2rem; font-size: 1.1rem; font-weight: 700; min-height: 3rem; padding: 0 1rem;"></div>
+  </section>
+
+  <div id="toast" class="toast"></div>
+
+  <script src="game.js"></script>
 </body>
 </html>
