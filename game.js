@@ -68,14 +68,6 @@ if (btnAuthToggle) {
 // Definimos la base de la API en producción
 const baseUrl = "https://sensed-production.up.railway.app/api/auth";
 
-// Asumimos que los elementos del DOM existen
-const btnAuthSubmit = document.getElementById('btn-auth-submit');
-const authUsernameInput = document.getElementById('auth-username');
-const authPasswordInput = document.getElementById('auth-password');
-
-// Asegúrate de que esta variable esté definida globalmente según tu lógica
-let isLoginMode = true; 
-
 if (btnAuthSubmit) {
     btnAuthSubmit.addEventListener('click', async (e) => {
         e.preventDefault();
