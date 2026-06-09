@@ -311,38 +311,4 @@ input[type="range"]::-webkit-slider-thumb {
   font-weight: normal;
 }
 
-/* Esto hace que cada pantalla ocupe exactamente el espacio del móvil y centre el contenido */
-.screen {
-    display: flex;
-    flex-direction: column; /* Apila los elementos uno debajo de otro */
-    justify-content: center; /* Centra verticalmente */
-    align-items: center;     /* Centra horizontalmente */
-    min-height: 100vh;       /* Asegura que ocupe al menos el alto total del móvil */
-    padding: 20px;           /* Deja aire a los lados */
-    box-sizing: border-box;  /* Importante para que el padding no rompa el ancho */
-}
 
-.btn-start {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 50px;      /* Tamaño mínimo para que sea fácil de tocar */
-    width: 100%;           /* Ocupa el ancho disponible */
-    max-width: 400px;      /* Que no se deforme en pantallas grandes */
-    padding: 1rem;
-    font-size: 1.2rem;
-    cursor: pointer;
-}
-
-@media (max-width: 600px) {
-    .home-title {
-        font-size: 1.8rem !important; /* Títulos más pequeños en móvil */
-    }
-    
-    .nav-modes {
-        display: flex;
-        flex-wrap: wrap; /* Si los botones no caben, se pasan a la línea de abajo */
-        justify-content: center;
-        gap: 10px;
-    }
-}
