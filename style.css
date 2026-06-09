@@ -311,4 +311,24 @@ input[type="range"]::-webkit-slider-thumb {
   font-weight: normal;
 }
 
+/* --- REGRESO AL MODO MÓVIL --- */
+@media (max-width: 768px) {
+    body {
+        font-size: 14px; /* Un poco más pequeño para que quepa todo */
+    }
+    
+    .screen {
+        padding: 10px; /* Menos margen en los lados */
+    }
+    
+    .btn-start {
+        width: 90%; /* Botones casi a pantalla completa */
+        padding: 1.5rem; /* Más área táctil para el dedo */
+    }
+    
+    .nav-modes {
+        flex-wrap: wrap; /* Si no caben, bajan a la siguiente fila */
+    }
+}
+
 
