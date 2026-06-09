@@ -753,4 +753,46 @@ window.addEventListener("keydown", (e) => {
             $("btn-fish-action").click(); 
         }
     }
+
+    // ─── 11. GAME JUICE (Efectos de Sonido UI) ─────────────────────────────────
+// Creamos un contexto de audio específico para la interfaz
+const uiAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+function playUIClick() {
+    // Los navegadores bloquean el audio hasta que el usuario interactúa, esto lo desbloquea
+    if (uiAudioCtx.state === 'suspended') uiAudioCtx.resume();
+    
+    const osc = uiAudioCtx.createOscillator();
+    const gainNode = uiAudioCtx.createGain();
+    
+    // Configuración de un "pop/clic" corto, moderno y muy sutil
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(800, uiAudioCtx.currentTime); // Empieza agudo
+    osc.frequency.exponentialRampToValueAtTime(100, uiAudioCtx.currentTime + 0.05); // Cae rápido
+    
+    gainNode.gain.setValueAtTime(0.15, uiAudioCtx.currentTime); // Volumen bajito (0.15) para no molestar
+    gainNode.gain.exponentialRampToValueAtTime(0.001, uiAudioCtx.currentTime + 0.05); // Se apaga en 50 milisegundos
+    
+    osc.connect(gainNode);
+    gainNode.connect(uiAudioCtx.destination);
+    
+    osc.start();
+    osc.stop(uiAudioCtx.currentTime + 0.05);
+}
+
+// Escuchamos TODOS los clics de la página automáticamente
+document.addEventListener('click', (e) => {
+    // Detecta si el usuario ha tocado un botón (o algo dentro de un botón)
+    const clickedButton = e.target.closest('button'); 
+    
+    if (clickedButton) {
+        // Excluimos los botones del juego de sonido para no ensuciar la prueba
+        const excludedIds = ['btn-sound-start', 'btn-sound-play', 'btn-sound-confirm'];
+        
+        // Si el ID del botón tocado NO está en la lista de excluidos, suena el clic
+        if (!excludedIds.includes(clickedButton.id)) {
+            playUIClick();
+        }
+    }
+});
 });
