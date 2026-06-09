@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-
+ 
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -10,9 +10,8 @@
   "url": "https://sensed.es",
   "image": "https://sensed.es/logo.svg"
 }
-
 </script>
-
+ 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
   
@@ -27,21 +26,21 @@
   <meta property="og:url" content="https://sensed.es" />
   <meta property="og:image" content="https://sensed.es/preview.png" />
   <meta property="og:type" content="website" />
-
+ 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Sensed, Juegos, Minijuegos, Games, Minigames, Test de Reflejos, Tiempo de Reacción" />
   <meta name="twitter:description" content="Mide tus reflejos, afina tu oído y pon a prueba tu tiempo de reacción con estos minijuegos gratuitos. ¿Podrás conseguir la máxima puntuación?" />
   <meta name="twitter:image" content="https://sensed.es/preview.png" />
-
+ 
   <link href="https://fonts.googleapis.com/css2?family=Space+Mono&family=DM+Sans:wght@400;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
   
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8996240781633351" crossorigin="anonymous"></script>
 </head>
-
+ 
 <body>
   <section class="screen active" id="screen-auth">
-    <div style="text-align: center; max-width: 350px; width: 100%; margin: 0 auto;">
+    <div style="text-align: center; max-width: 350px; margin: 0 auto; margin-top: 10vh;">
       <div style="font-size: 4rem; margin-bottom: 1rem;">⚡</div>
       <h1 class="home-title" style="font-size: 2.5rem; margin-bottom: 2rem;">Sensed</h1>
       
@@ -54,19 +53,14 @@
         
         <button class="btn-start" id="btn-auth-submit" style="width: 100%; margin-bottom: 1rem;">ENTRAR</button>
         
-       <p style="color: var(--text3); font-size: 0.9rem; margin-bottom: 1.5rem;">
+        <p style="color: var(--text3); font-size: 0.9rem;">
           <span id="auth-toggle-text">¿No tienes cuenta?</span> 
           <a href="#" id="btn-auth-toggle" style="color: var(--accent); font-weight: bold; text-decoration: none;">Regístrate</a>
         </p>
-        
-        <div style="border-top: 1px solid #333; padding-top: 1.5rem;">
-          <button class="btn-start" id="btn-guest-submit" style="width: 100%; background: transparent; border: 1px solid var(--text3); color: var(--text); font-size: 1rem;">ENTRAR COMO INVITADO</button>
-        </div>
-        
       </div>
     </div>
   </section>
-
+ 
   <nav class="nav" id="main-nav" style="display: none;">
     <a href="#" class="nav-logo" id="nav-logo">sensed</a>
     <div class="nav-modes">
@@ -77,30 +71,31 @@
     </div>
     <div class="nav-score-display" id="nav-score">0 pts</div>
   </nav>
-
- <section class="screen" id="screen-home">
+ 
+  <!-- ===== SCREEN HOME (Color) ===== -->
+  <section class="screen" id="screen-home">
     <div class="home-content">
       <h1 class="home-title">¿Recuerdas el color?</h1>
       <button class="btn-start" id="btn-start">empezar</button>
       
-     <p class="seo-text">
-          ¿Quieres medir tu agilidad mental? Sensed es la plataforma definitiva de <strong>minijuegos de entrenamiento cognitivo</strong>. Desde tests de <strong>tiempo de reacción</strong> hasta desafíos de <strong>percepción auditiva</strong>, compite, mejora tus marcas y descubre qué tan rápidos son tus sentidos. ¡Juega gratis ahora!
+      <p class="seo-text">
+        ¿Quieres medir tu agilidad mental? Sensed es la plataforma definitiva de <strong>minijuegos de entrenamiento cognitivo</strong>. Desde tests de <strong>tiempo de reacción</strong> hasta desafíos de <strong>percepción auditiva</strong>, compite, mejora tus marcas y descubre qué tan rápidos son tus sentidos. ¡Juega gratis ahora!
       </p>
     </div>
-
+ 
+    <!-- Banner Sensed Menú — slot: 5227166707 -->
     <div class="ad-safe-zone">
       <ins class="adsbygoogle"
-           style="display:block; width:100%; height:90px;"
+           style="display:block; width:100%;"
            data-ad-client="ca-pub-8996240781633351"
            data-ad-slot="5227166707"
-           data-ad-format="horizontal"
+           data-ad-format="auto"
            data-full-width-responsive="true"></ins>
-      <script>
-           (adsbygoogle = window.adsbygoogle || []).push({});
-      </script>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
   </section>
-
+ 
+  <!-- ===== SCREEN COLOR MEMORIZE ===== -->
   <section class="screen" id="screen-color-memorize">
     <div class="memorize-top">
       <span class="round-label">RONDA <span id="color-round-num">1</span>/5</span>
@@ -109,7 +104,8 @@
     <div class="color-display" id="color-display"></div>
     <p class="memorize-hint">Memoriza este color...</p>
   </section>
-
+ 
+  <!-- ===== SCREEN COLOR GUESS ===== -->
   <section class="screen" id="screen-color-guess">
     <div class="guess-top">
       <span class="round-label">RONDA <span id="color-guess-num">1</span>/5</span>
@@ -131,7 +127,8 @@
     
     <button class="btn-start" id="btn-color-confirm" style="display: block; margin: 1rem auto 0 auto; width: 100%; max-width: 400px;">CONFIRMAR COLOR</button>
   </section>
-
+ 
+  <!-- ===== SCREEN COLOR RESULT ===== -->
   <section class="screen" id="screen-color-result">
     <div style="display:flex; gap: 1rem; justify-content: center; margin: 2rem 0;">
       <div style="text-align:center;">
@@ -149,7 +146,8 @@
     </div>
     <button class="btn-start" id="btn-next-color" style="display: block; margin: 2rem auto 0 auto; width: 100%; max-width: 400px;">SIGUIENTE RONDA</button>
   </section>
-
+ 
+  <!-- ===== SCREEN FINAL ===== -->
   <section class="screen" id="screen-final">
     <div style="text-align: center; margin: 2rem 0;">
       <h2 style="color: var(--text3); font-size: 1.2rem;">PUNTUACIÓN FINAL</h2>
@@ -159,38 +157,38 @@
     <div id="final-swatches" style="display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 2rem;"></div>
     <button class="btn-start" id="btn-play-again" style="display: block; margin: 0 auto; width: 100%; max-width: 400px;">VOLVER AL INICIO</button>
     
+    <!-- Banner Sensed Final — slot: 8808025938 -->
     <div class="ad-safe-zone">
       <ins class="adsbygoogle"
-           style="display:block; width:100%; height:90px;"
+           style="display:block; width:100%;"
            data-ad-client="ca-pub-8996240781633351"
-           data-ad-slot="5227166707"
-           data-ad-format="horizontal"
+           data-ad-slot="8808025938"
+           data-ad-format="auto"
            data-full-width-responsive="true"></ins>
-      <script>
-           (adsbygoogle = window.adsbygoogle || []).push({});
-      </script>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
   </section>
-
+ 
+  <!-- ===== SCREEN SONIDO HOME ===== -->
   <section class="screen" id="screen-sound-home">
     <div class="home-content">
       <h1 class="home-title">¿Tienes buen oído?</h1>
       <button class="btn-start" id="btn-sound-start">empezar</button>
     </div>
     
+    <!-- Banner Sensed Sonido — slot: 1571160598 -->
     <div class="ad-safe-zone">
       <ins class="adsbygoogle"
-           style="display:block; width:100%; height:90px;"
+           style="display:block; width:100%;"
            data-ad-client="ca-pub-8996240781633351"
-           data-ad-slot="5227166707"
-           data-ad-format="horizontal"
+           data-ad-slot="1571160598"
+           data-ad-format="auto"
            data-full-width-responsive="true"></ins>
-      <script>
-           (adsbygoogle = window.adsbygoogle || []).push({});
-      </script>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
   </section>
-
+ 
+  <!-- ===== SCREEN SONIDO GAME ===== -->
   <section class="screen" id="screen-sound-game">
     <div class="memorize-top">
       <span class="round-label">RONDA <span id="sound-round-num">1</span>/5</span>
@@ -207,26 +205,27 @@
     </div>
     <button class="btn-start" id="btn-sound-confirm" style="display: block; margin: 1rem auto 0 auto; width: 100%; max-width: 400px; background: var(--success);">CONFIRMAR AFINACIÓN</button>
   </section>
-
+ 
+  <!-- ===== SCREEN TIEMPO HOME ===== -->
   <section class="screen" id="screen-time-home">
     <div class="home-content">
       <h1 class="home-title">¿Mides bien el tiempo?</h1>
       <button class="btn-start" id="btn-time-start">empezar</button>
     </div>
     
+    <!-- Banner Sensed Tiempo — slot: 6308481958 -->
     <div class="ad-safe-zone">
       <ins class="adsbygoogle"
-           style="display:block; width:100%; height:90px;"
+           style="display:block; width:100%;"
            data-ad-client="ca-pub-8996240781633351"
-           data-ad-slot="5227166707"
-           data-ad-format="horizontal"
+           data-ad-slot="6308481958"
+           data-ad-format="auto"
            data-full-width-responsive="true"></ins>
-      <script>
-           (adsbygoogle = window.adsbygoogle || []).push({});
-      </script>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
   </section>
-
+ 
+  <!-- ===== SCREEN TIEMPO GAME ===== -->
   <section class="screen" id="screen-time-game">
     <div class="memorize-top">
       <span class="round-label">RONDA <span id="time-round-num">1</span>/5</span>
@@ -241,26 +240,27 @@
     </button>
     <div id="time-result-text" style="text-align: center; margin-top: 2rem; font-size: 1.2rem; font-weight: 700; min-height: 2rem;"></div>
   </section>
-
+ 
+  <!-- ===== SCREEN PESCA HOME ===== -->
   <section class="screen" id="screen-fishing-home">
     <div class="home-content">
       <h1 class="home-title">Jornada de Pesca</h1>
       <button class="btn-start" id="btn-fishing-start">empezar</button>
     </div>
     
+    <!-- Banner Sensed Pesca — slot: 9617171573 -->
     <div class="ad-safe-zone">
       <ins class="adsbygoogle"
-           style="display:block; width:100%; height:90px;"
+           style="display:block; width:100%;"
            data-ad-client="ca-pub-8996240781633351"
-           data-ad-slot="5227166707"
-           data-ad-format="horizontal"
+           data-ad-slot="9617171573"
+           data-ad-format="auto"
            data-full-width-responsive="true"></ins>
-      <script>
-           (adsbygoogle = window.adsbygoogle || []).push({});
-      </script>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
   </section>
-
+ 
+  <!-- ===== SCREEN PESCA GAME ===== -->
   <section class="screen" id="screen-fishing-game">
     <div class="memorize-top">
       <span class="round-label">LANCE <span id="fishing-round-num">1</span>/5</span>
@@ -275,9 +275,9 @@
     </button>
     <div id="fish-result-text" style="text-align: center; margin-top: 2rem; font-size: 1.1rem; font-weight: 700; min-height: 3rem; padding: 0 1rem;"></div>
   </section>
-
+ 
   <div id="toast" class="toast"></div>
-
+ 
   <script src="game.js"></script>
 </body>
 </html>
