@@ -721,37 +721,4 @@ window.addEventListener("keydown", (e) => {
             $("btn-fish-action").click(); 
         }
     }
-
-// Abrir y cerrar modal
-const modal = $("ranking-modal");
-$("btn-open-ranking").addEventListener("click", () => {
-    modal.style.display = "flex";
-    loadRanking('color'); // Cargar color por defecto
-});
-$("close-ranking").addEventListener("click", () => modal.style.display = "none");
-
-// Cargar top 5
-async function loadRanking(gameType) {
-    const list = $("ranking-list");
-    list.innerHTML = "Cargando...";
-    
-    // Cambiar clase activa en botones de tab
-    document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
-    event.target.classList.add("active");
-
-    try {
-        // Ajusta esta URL a la ruta de tu API (ej: /api/scores/top5/color)
-        const response = await fetch(`${baseUrl.replace('/auth', '')}/scores/top5/${gameType}`);
-        const data = await response.json();
-
-        list.innerHTML = data.map((entry, i) => `
-            <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom: 1px solid #333;">
-                <span>${i+1}. ${entry.username}</span>
-                <b>${entry.score} pts</b>
-            </div>
-        `).join('');
-    } catch (e) {
-        list.innerHTML = "No se pudo cargar el ranking.";
-    }
-}
 });
