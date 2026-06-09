@@ -284,9 +284,14 @@ if (btnNextColor) {
 }
 
 function showColorFinal() {
-    const finalScore = state.totalColorScore * 10;
+    // 1. Quitamos el "* 10" para que mantenga el formato sobre 50
+    const finalScore = state.totalColorScore;
+    
+    // 2. Imprimimos el número con un decimal (ej: 29.3)
     $("final-score-big").textContent = finalScore.toFixed(1);
-    $("final-grade").textContent = state.totalColorScore >= 40 ? "Ojo de artista 🎨" : "Buen intento 👍";
+    
+    // 3. Evaluamos el mensaje en base a la nota real (sobre 50)
+    $("final-grade").textContent = finalScore >= 40 ? "Ojo de artista 🎨" : "Buen intento 👍";
     
     const container = $("final-swatches"); 
     if(container) container.innerHTML = "";
