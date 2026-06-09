@@ -310,6 +310,3 @@ input[type="range"]::-webkit-slider-thumb {
   color: var(--text2);
   font-weight: normal;
 }
-
-.screen { display: none; }
-.screen.active { display: block; }
