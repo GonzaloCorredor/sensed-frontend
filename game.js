@@ -175,6 +175,29 @@ if (navLogo) {
     });
 }
 
+// --- LÓGICA DEL BOTÓN DE INVITADO ---
+const btnGuestSubmit = $("btn-guest-submit");
+if (btnGuestSubmit) {
+    btnGuestSubmit.addEventListener('click', (e) => {
+        e.preventDefault();
+        
+        // 1. Ocultamos la pantalla de Login
+        document.getElementById('screen-auth').classList.remove('active');
+        
+        // 2. Mostramos la pantalla principal
+        document.getElementById('screen-home').classList.add('active');
+        
+        // 3. Mostramos la barra de navegación
+        document.getElementById('main-nav').style.display = 'flex';
+        
+        // 4. Inicializamos la UI
+        updateScoreUI('color');
+        
+        // 5. Un pequeño feedback visual
+        showToast("Jugando como invitado 👻", 2500);
+    });
+}
+
 // ─── 5. MODO COLOR (5 Rondas) ──────────────────────────────────────────────
 function randomColor() { return { h: rand(0, 360), s: rand(30, 95), l: rand(25, 75) }; }
 function hslStr({ h, s, l }) { return `hsl(${h}, ${s}%, ${l}%)`; }
