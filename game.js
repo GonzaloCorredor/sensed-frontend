@@ -3,6 +3,30 @@
    SENSED.GG — game.js (ESTRUCTURA UNIFICADA Y CORREGIDA)
    ============================================================ */
 
+   //Inicializar puntuaciones
+let gameScores = JSON.parse(sessionStorage.getItem('sensedScores')) || {
+    color: 0,
+    sound: 0,
+    time: 0,
+    fishing: 0
+};
+
+//Función para sumar puntos
+function addPoints(mode, points) {
+    gameScores[mode] += points;
+    // Guardar en sessionStorage (se borra al cerrar el navegador/pestaña)
+    sessionStorage.setItem('sensedScores', JSON.stringify(gameScores));
+    updateScoreUI(mode);
+}
+
+//Función para actualizar la pantalla
+function updateScoreUI(mode) {
+    const scoreElement = document.getElementById('nav-score');
+    if (scoreElement) {
+        scoreElement.innerText = `${gameScores[mode]} pts`;
+    }
+}
+
 // ─── 1. UTILIDADES Y GESTIÓN DE PANTALLAS ──────────────────────────────────
 const $ = (id) => document.getElementById(id);
 
@@ -173,6 +197,7 @@ if (btnStartColor) {
 }
 
 function showNextColorMemorize() {
+    addPoints('color', pointsWon);
     const idx = state.currentColorIndex;
     if (idx >= state.colors.length) { showColorFinal(); return; }
     
