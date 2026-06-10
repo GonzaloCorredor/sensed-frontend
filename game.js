@@ -175,26 +175,34 @@ if (navLogo) {
     });
 }
 
-// --- LÓGICA DEL BOTÓN DE INVITADO ---
-const btnGuestSubmit = $("btn-guest-submit");
+// ─── LÓGICA DEL BOTÓN DE INVITADO ─────────────────────────────
+const btnGuestSubmit = document.getElementById("btn-guest-submit");
+
 if (btnGuestSubmit) {
     btnGuestSubmit.addEventListener('click', (e) => {
-        e.preventDefault();
+        e.preventDefault(); // Evita que la página se recargue
         
         // 1. Ocultamos la pantalla de Login
         document.getElementById('screen-auth').classList.remove('active');
         
-        // 2. Mostramos la pantalla principal
+        // 2. Mostramos la pantalla principal de los juegos
         document.getElementById('screen-home').classList.add('active');
         
-        // 3. Mostramos la barra de navegación
-        document.getElementById('main-nav').style.display = 'flex';
+        // 3. Mostramos la barra de navegación superior
+        const mainNav = document.getElementById('main-nav');
+        if (mainNav) {
+            mainNav.style.display = 'flex';
+        }
         
-        // 4. Inicializamos la UI
-        updateScoreUI('color');
+        // 4. Inicializamos la interfaz
+        if (typeof updateScoreUI === 'function') {
+            updateScoreUI('color');
+        }
         
-        // 5. Un pequeño feedback visual
-        showToast("Jugando como invitado 👻", 2500);
+        // 5. Mensaje de confirmación
+        if (typeof showToast === 'function') {
+            showToast("Jugando como invitado 👻", 2500);
+        }
     });
 }
 
