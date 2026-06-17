@@ -1,74 +1,84 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
- 
-    <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "Sensed",
-  "url": "https://sensed.es",
-  "image": "https://sensed.es/logo.svg"
-}
-</script>
- 
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Sensed",
+    "url": "https://sensed.es",
+    "image": "https://sensed.es/logo.svg"
+  }
+  </script>
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
-  
   <title>Sensed, Juegos, Minijuegos, Games, Minigames, Test de Reflejos, Tiempo de Reacción</title>
-  
   <link rel="icon" type="image/png" href="logo.png">
-  
   <meta name="description" content="¡Desafía tus límites! Pon a prueba tus reflejos, memoria visual y agudeza auditiva con minijuegos gratuitos. ¿Tienes lo necesario para alcanzar el top mundial? Entrena tu mente hoy." />
-  
   <meta property="og:title" content="Sensed, Juegos, Minijuegos, Games, Minigames, Test de Reflejos, Tiempo de Reacción" />
   <meta property="og:description" content="Mide tus reflejos, afina tu oído y pon a prueba tu tiempo de reacción con estos minijuegos gratuitos. ¿Podrás conseguir la máxima puntuación?" />
   <meta property="og:url" content="https://sensed.es" />
   <meta property="og:image" content="https://sensed.es/preview.png" />
   <meta property="og:type" content="website" />
- 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Sensed, Juegos, Minijuegos, Games, Minigames, Test de Reflejos, Tiempo de Reacción" />
   <meta name="twitter:description" content="Mide tus reflejos, afina tu oído y pon a prueba tu tiempo de reacción con estos minijuegos gratuitos. ¿Podrás conseguir la máxima puntuación?" />
   <meta name="twitter:image" content="https://sensed.es/preview.png" />
- 
+
   <link href="https://fonts.googleapis.com/css2?family=Space+Mono&family=DM+Sans:wght@400;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
-  
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8996240781633351" crossorigin="anonymous"></script>
+  <style>
+    .site-footer {
+      margin-top: auto;
+      padding: 2rem 1.5rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--text3);
+    }
+    .site-footer a { color: var(--text3); text-decoration: none; margin: 0 0.6rem; }
+    .site-footer a:hover { color: var(--accent); }
+    .site-footer .sep { opacity: 0.4; }
+  </style>
 </head>
- 
+
 <body>
+
+  <!-- ===== SCREEN AUTH ===== -->
   <section class="screen active" id="screen-auth">
     <div style="text-align: center; max-width: 350px; margin: 0 auto; margin-top: 10vh;">
       <div style="font-size: 4rem; margin-bottom: 1rem;">⚡</div>
       <h1 class="home-title" style="font-size: 2.5rem; margin-bottom: 2rem;">Sensed</h1>
-      
+
       <div id="auth-form-container" style="background: var(--bg2); padding: 2rem; border-radius: 12px;">
         <h2 id="auth-title" style="color: var(--text); margin-bottom: 1.5rem; font-size: 1.2rem;">Iniciar Sesión</h2>
-        
-        <input type="text" id="auth-username" placeholder="Nombre de usuario" style="width: 100%; padding: 1rem; margin-bottom: 1rem; border-radius: 8px; border: 1px solid var(--text3); background: var(--bg); color: var(--text); font-family: var(--font);" />
-        
-        <input type="password" id="auth-password" placeholder="Contraseña" style="width: 100%; padding: 1rem; margin-bottom: 1.5rem; border-radius: 8px; border: 1px solid var(--text3); background: var(--bg); color: var(--text); font-family: var(--font);" />
-        
-        <button class="btn-start" id="btn-auth-submit" style="width: 100%; margin-bottom: 1rem;">ENTRAR</button>
-        
-        <p style="color: var(--text3); font-size: 0.9rem; margin-bottom: 1.5rem;">
-          <span id="auth-toggle-text">¿No tienes cuenta?</span> 
+
+        <input type="text" id="auth-username" placeholder="Nombre de usuario"
+          style="width: 100%; padding: 1rem; margin-bottom: 1rem; border-radius: 8px; border: 1px solid var(--text3); background: var(--bg); color: var(--text); font-family: var(--sans); font-size: 1rem;" />
+
+        <input type="password" id="auth-password" placeholder="Contraseña"
+          style="width: 100%; padding: 1rem; margin-bottom: 1.5rem; border-radius: 8px; border: 1px solid var(--text3); background: var(--bg); color: var(--text); font-family: var(--sans); font-size: 1rem;" />
+
+        <button class="btn-start" id="btn-auth-submit" style="width: 100%; margin-bottom: 0.75rem;">ENTRAR</button>
+
+        <!-- BOTÓN INVITADO -->
+        <button class="btn-start" id="btn-guest"
+          style="width: 100%; margin-bottom: 1.2rem; background: transparent; border: 1px solid var(--border2); color: var(--text2);">
+          ENTRAR COMO INVITADO
+        </button>
+
+        <p style="color: var(--text3); font-size: 0.9rem;">
+          <span id="auth-toggle-text">¿No tienes cuenta?</span>
           <a href="#" id="btn-auth-toggle" style="color: var(--accent); font-weight: bold; text-decoration: none;">Regístrate</a>
         </p>
-
-        <!-- Línea separadora y botón de invitado -->
-        <div style="border-top: 1px solid #333; margin-top: 1.5rem; padding-top: 1.5rem;">
-          <button class="btn-start" id="btn-guest-submit" style="width: 100%; min-height: 50px; background: transparent; border: 1px solid var(--text3); color: var(--text); font-size: 0.95rem; display: flex; justify-content: center; align-items: center; white-space: nowrap; transition: 0.2s; cursor: pointer;">
-            ENTRAR COMO INVITADO
-          </button>
-        </div>
-        
-      </div> <!-- Cierre del div del formulario -->
-    </div> <!-- Cierre de la caja oscura -->
+      </div>
+    </div>
   </section>
- 
+
+  <!-- ===== NAV ===== -->
   <nav class="nav" id="main-nav" style="display: none;">
     <a href="#" class="nav-logo" id="nav-logo">sensed</a>
     <div class="nav-modes">
@@ -79,22 +89,26 @@
     </div>
     <div class="nav-score-display" id="nav-score">0 pts</div>
   </nav>
- 
+
   <!-- ===== SCREEN HOME (Color) ===== -->
   <section class="screen" id="screen-home">
     <div class="home-content">
       <h1 class="home-title">¿Recuerdas el color?</h1>
       <button class="btn-start" id="btn-start">empezar</button>
-      
       <p class="seo-text">
-        ¿Quieres medir tu agilidad mental? Sensed es la plataforma definitiva de <strong>minijuegos de entrenamiento cognitivo</strong>. Desde tests de <strong>tiempo de reacción</strong> hasta desafíos de <strong>percepción auditiva</strong>, compite, mejora tus marcas y descubre qué tan rápidos son tus sentidos. ¡Juega gratis ahora!
+        ¿Quieres medir tu agilidad mental? Sensed es la plataforma definitiva de <strong>minijuegos de entrenamiento cognitivo</strong>.
+        Desde tests de <strong>tiempo de reacción</strong> hasta desafíos de <strong>percepción auditiva</strong>, compite, mejora tus marcas
+        y descubre qué tan rápidos son tus sentidos. ¡Juega gratis ahora!
+      </p>
+      <p class="seo-text">
+        El juego de Color pone a prueba tu memoria visual: memoriza un tono exacto durante unos segundos y luego intenta reproducirlo
+        ajustando el matiz, la saturación y la luminosidad con los deslizadores. Cuanto más cerca quede tu reproducción del color original,
+        más puntos sumarás. Completa las 5 rondas para obtener tu puntuación final y comprobar si tienes ojo de artista.
       </p>
     </div>
- 
     <!-- Banner Sensed Menú — slot: 5227166707 -->
     <div class="ad-safe-zone">
-      <ins class="adsbygoogle"
-           style="display:block; width:100%;"
+      <ins class="adsbygoogle" style="display:block; width:100%;"
            data-ad-client="ca-pub-8996240781633351"
            data-ad-slot="5227166707"
            data-ad-format="auto"
@@ -102,7 +116,7 @@
       <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
   </section>
- 
+
   <!-- ===== SCREEN COLOR MEMORIZE ===== -->
   <section class="screen" id="screen-color-memorize">
     <div class="memorize-top">
@@ -112,14 +126,14 @@
     <div class="color-display" id="color-display"></div>
     <p class="memorize-hint">Memoriza este color...</p>
   </section>
- 
+
   <!-- ===== SCREEN COLOR GUESS ===== -->
   <section class="screen" id="screen-color-guess">
     <div class="guess-top">
       <span class="round-label">RONDA <span id="color-guess-num">1</span>/5</span>
     </div>
     <div class="color-display" id="color-preview-box" style="height: 150px; margin-bottom: 2rem;"></div>
-    
+
     <div class="slider-group">
       <label>Tono (H): <span id="val-h">0</span></label>
       <input type="range" id="slider-h" min="0" max="360" value="0" class="slider" />
@@ -132,10 +146,10 @@
       <label>Luminosidad (L): <span id="val-l">0</span>%</label>
       <input type="range" id="slider-l" min="0" max="100" value="0" class="slider" />
     </div>
-    
+
     <button class="btn-start" id="btn-color-confirm" style="display: block; margin: 1rem auto 0 auto; width: 100%; max-width: 400px;">CONFIRMAR COLOR</button>
   </section>
- 
+
   <!-- ===== SCREEN COLOR RESULT ===== -->
   <section class="screen" id="screen-color-result">
     <div style="display:flex; gap: 1rem; justify-content: center; margin: 2rem 0;">
@@ -154,7 +168,7 @@
     </div>
     <button class="btn-start" id="btn-next-color" style="display: block; margin: 2rem auto 0 auto; width: 100%; max-width: 400px;">SIGUIENTE RONDA</button>
   </section>
- 
+
   <!-- ===== SCREEN FINAL ===== -->
   <section class="screen" id="screen-final">
     <div style="text-align: center; margin: 2rem 0;">
@@ -164,11 +178,9 @@
     </div>
     <div id="final-swatches" style="display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 2rem;"></div>
     <button class="btn-start" id="btn-play-again" style="display: block; margin: 0 auto; width: 100%; max-width: 400px;">VOLVER AL INICIO</button>
-    
     <!-- Banner Sensed Final — slot: 8808025938 -->
     <div class="ad-safe-zone">
-      <ins class="adsbygoogle"
-           style="display:block; width:100%;"
+      <ins class="adsbygoogle" style="display:block; width:100%;"
            data-ad-client="ca-pub-8996240781633351"
            data-ad-slot="8808025938"
            data-ad-format="auto"
@@ -176,18 +188,22 @@
       <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
   </section>
- 
+
   <!-- ===== SCREEN SONIDO HOME ===== -->
   <section class="screen" id="screen-sound-home">
     <div class="home-content">
       <h1 class="home-title">¿Tienes buen oído?</h1>
       <button class="btn-start" id="btn-sound-start">empezar</button>
+      <p class="seo-text">
+        El modo Sonido pone a prueba tu oído absoluto y tu capacidad de afinación. En cada ronda escucharás la nota objetivo de un
+        instrumento distinto (diapasón, bajo eléctrico, saxofón, sintetizador y flauta) hasta un máximo de 3 veces, y deberás reproducir
+        la misma frecuencia moviendo el deslizador de Hercios. Cuanto más exacta sea tu afinación, mayor será tu puntuación en esta
+        ronda de entrenamiento auditivo.
+      </p>
     </div>
-    
     <!-- Banner Sensed Sonido — slot: 1571160598 -->
     <div class="ad-safe-zone">
-      <ins class="adsbygoogle"
-           style="display:block; width:100%;"
+      <ins class="adsbygoogle" style="display:block; width:100%;"
            data-ad-client="ca-pub-8996240781633351"
            data-ad-slot="1571160598"
            data-ad-format="auto"
@@ -195,7 +211,7 @@
       <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
   </section>
- 
+
   <!-- ===== SCREEN SONIDO GAME ===== -->
   <section class="screen" id="screen-sound-game">
     <div class="memorize-top">
@@ -206,25 +222,29 @@
       <h2 id="sound-name" style="margin: 0.5rem 0; color: var(--text);">Diapasón</h2>
       <p id="sound-desc" style="color: var(--text3); font-size: 0.9rem;">Afina la nota objetivo</p>
     </div>
-    <button class="btn-start" id="btn-sound-play" style="display: block; margin: 0 auto 2rem auto; width: 100%; max-width: 400px;">ESCUCHAR OBJETIVO</button>
+    <button class="btn-start" id="btn-sound-play" style="display: block; margin: 0 auto 2rem auto; width: 100%; max-width: 400px;">ESCUCHAR OBJETIVO (3/3)</button>
     <div class="sound-controls">
       <label>TU AFINACIÓN: <span id="sound-val">440</span> Hz</label>
       <input type="range" id="slider-hz" min="100" max="1000" value="440" class="slider">
     </div>
     <button class="btn-start" id="btn-sound-confirm" style="display: block; margin: 1rem auto 0 auto; width: 100%; max-width: 400px; background: var(--success);">CONFIRMAR AFINACIÓN</button>
   </section>
- 
+
   <!-- ===== SCREEN TIEMPO HOME ===== -->
   <section class="screen" id="screen-time-home">
     <div class="home-content">
       <h1 class="home-title">¿Mides bien el tiempo?</h1>
       <button class="btn-start" id="btn-time-start">empezar</button>
+      <p class="seo-text">
+        El modo Tiempo entrena tu sentido interno del paso de los segundos. Se te asignará un tiempo objetivo aleatorio de entre 1.5
+        y 5.5 segundos: pulsa el botón para iniciar el cronómetro y vuelve a pulsarlo justo cuando creas que ha transcurrido ese tiempo,
+        sin mirar ningún reloj. Cuanto más cerca esté tu marca del objetivo, más puntos conseguirás en las 5 rondas de esta prueba de
+        precisión temporal.
+      </p>
     </div>
-    
     <!-- Banner Sensed Tiempo — slot: 6308481958 -->
     <div class="ad-safe-zone">
-      <ins class="adsbygoogle"
-           style="display:block; width:100%;"
+      <ins class="adsbygoogle" style="display:block; width:100%;"
            data-ad-client="ca-pub-8996240781633351"
            data-ad-slot="6308481958"
            data-ad-format="auto"
@@ -232,7 +252,7 @@
       <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
   </section>
- 
+
   <!-- ===== SCREEN TIEMPO GAME ===== -->
   <section class="screen" id="screen-time-game">
     <div class="memorize-top">
@@ -242,24 +262,29 @@
       <h2 style="color: var(--text3); font-size: 1rem;">Detén el cronómetro a los:</h2>
       <div id="time-target" style="font-size: 4rem; font-family: var(--mono); font-weight: 700; color: var(--accent); margin: 1rem 0;">0.00s</div>
     </div>
-    <button class="btn-start" id="btn-time-action" style="margin: 2rem auto 0 auto; width: 100%; max-width: 400px; height: 120px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.5rem; transition: background 0.1s;">
+    <button class="btn-start" id="btn-time-action"
+      style="margin: 2rem auto 0 auto; width: 100%; max-width: 400px; height: 120px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.5rem; transition: background 0.1s;">
       <span id="time-btn-title" style="font-size: 2rem;">EMPEZAR</span>
       <span id="time-btn-sub" style="font-size: 0.9rem; opacity: 0.8;">Haz clic para iniciar</span>
     </button>
     <div id="time-result-text" style="text-align: center; margin-top: 2rem; font-size: 1.2rem; font-weight: 700; min-height: 2rem;"></div>
   </section>
- 
+
   <!-- ===== SCREEN PESCA HOME ===== -->
   <section class="screen" id="screen-fishing-home">
     <div class="home-content">
       <h1 class="home-title">Jornada de Pesca</h1>
       <button class="btn-start" id="btn-fishing-start">empezar</button>
+      <p class="seo-text">
+        El modo Pesca mide tus reflejos puros. Lanza la caña y espera atento la picada: en un momento aleatorio el botón cambiará de
+        color indicando que un pez ha mordido el señuelo, y deberás reaccionar lo más rápido posible para clavar el anzuelo. Cuanto
+        menor sea tu tiempo de reacción, mayor será el tamaño y el valor de la captura, desde peces diminutos hasta auténticos trofeos
+        como el siluro gigante. Disfruta de 5 lances por jornada para poner a prueba tu velocidad de respuesta.
+      </p>
     </div>
-    
     <!-- Banner Sensed Pesca — slot: 9617171573 -->
     <div class="ad-safe-zone">
-      <ins class="adsbygoogle"
-           style="display:block; width:100%;"
+      <ins class="adsbygoogle" style="display:block; width:100%;"
            data-ad-client="ca-pub-8996240781633351"
            data-ad-slot="9617171573"
            data-ad-format="auto"
@@ -267,7 +292,7 @@
       <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
   </section>
- 
+
   <!-- ===== SCREEN PESCA GAME ===== -->
   <section class="screen" id="screen-fishing-game">
     <div class="memorize-top">
@@ -277,15 +302,22 @@
       <h2 style="color: var(--text3); font-size: 1rem;">Tiempo de reacción:</h2>
       <div id="fish-reaction-time" style="font-size: 3rem; font-family: var(--mono); font-weight: 700; color: var(--accent); margin: 1rem 0;">-- ms</div>
     </div>
-    <button class="btn-start" id="btn-fish-action" style="margin: 2rem auto 0 auto; width: 100%; max-width: 400px; height: 150px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.5rem; background-color: #3b82f6;">
+    <button class="btn-start" id="btn-fish-action"
+      style="margin: 2rem auto 0 auto; width: 100%; max-width: 400px; height: 150px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.5rem; background-color: #3b82f6;">
       <span id="fish-btn-title" style="font-size: 2rem;">LANZAR CAÑA</span>
       <span id="fish-btn-sub" style="font-size: 0.9rem; opacity: 0.8;">Haz clic para lanzar</span>
     </button>
     <div id="fish-result-text" style="text-align: center; margin-top: 2rem; font-size: 1.1rem; font-weight: 700; min-height: 3rem; padding: 0 1rem;"></div>
   </section>
- 
+
+  <footer class="site-footer">
+    <a href="/aviso-legal.html">Aviso Legal</a><span class="sep">·</span>
+    <a href="/privacidad.html">Privacidad</a><span class="sep">·</span>
+    <a href="/contacto.html">Contacto</a>
+    <div style="margin-top: 0.8rem; opacity: 0.6;">© 2026 Sensed</div>
+  </footer>
+
   <div id="toast" class="toast"></div>
- 
   <script src="game.js"></script>
 </body>
 </html>
