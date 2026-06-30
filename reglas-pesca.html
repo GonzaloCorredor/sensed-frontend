@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reglas del juego de Pesca — Sensed</title>
+  <meta name="description" content="Aprende cómo funciona el modo Pesca de Sensed: tiempo de reacción ante un estímulo visual, niveles de captura y consejos para mejorar tus reflejos." />
+  <link rel="icon" type="image/png" href="logo.png">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono&family=DM+Sans:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .legal-wrap { max-width: 720px; margin: 0 auto; padding: 3rem 1.5rem; color: var(--text2); line-height: 1.75; }
+    .legal-wrap h1 { color: var(--text); font-size: 2.2rem; margin-bottom: 0.5rem; }
+    .legal-wrap .subtitle { color: var(--accent); font-family: var(--mono); font-size: 0.85rem; margin-bottom: 2rem; letter-spacing: 0.05em; }
+    .legal-wrap h2 { color: var(--text); font-size: 1.25rem; margin: 2.2rem 0 0.9rem; }
+    .legal-wrap p, .legal-wrap li { font-size: 0.97rem; }
+    .legal-wrap a { color: var(--accent); }
+    .legal-back { display: inline-block; margin-bottom: 2rem; color: var(--accent); text-decoration: none; font-family: var(--mono); font-size: 0.85rem; }
+    .legal-wrap ul, .legal-wrap ol { padding-left: 1.3rem; margin: 0.8rem 0; }
+    .legal-wrap li { margin-bottom: 0.4rem; }
+    .score-table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-family: var(--mono); font-size: 0.85rem; }
+    .score-table th, .score-table td { text-align: left; padding: 0.6rem 0.8rem; border-bottom: 1px solid var(--border); }
+    .score-table th { color: var(--text); }
+    .play-cta { display: inline-block; margin-top: 2.5rem; background: var(--accent); color: #000; font-family: var(--mono); font-weight: 700; padding: 0.9rem 1.8rem; border-radius: 10px; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <div class="legal-wrap">
+    <a href="/" class="legal-back">← volver a sensed</a>
+    <h1>Reglas del juego de Pesca</h1>
+    <p class="subtitle">VELOCIDAD DE REACCIÓN ANTE UN ESTÍMULO VISUAL</p>
+
+    <p>El modo Pesca está construido alrededor de una de las métricas más estudiadas en psicología experimental: el tiempo de reacción simple, es decir, la rapidez con la que el cuerpo humano responde a un estímulo visual inesperado. Sensed envuelve esta medición en la mecánica de un lance de pesca, donde reaccionar a tiempo determina qué tipo de captura obtienes.</p>
+
+    <h2>Cómo se juega</h2>
+    <p>Cada jornada de pesca consta de cinco lances. La estructura de cada lance es la siguiente:</p>
+    <ol>
+      <li>Pulsa "Lanzar caña" para iniciar el lance. El botón cambiará a un estado de espera con el mensaje "Atento a la puntera".</li>
+      <li>Tras un intervalo de tiempo aleatorio, de entre dos y seis segundos, el botón cambiará bruscamente de color y mostrará el mensaje "¡CLAVA!". Este es el momento exacto en que debes reaccionar.</li>
+      <li>Pulsa el botón lo más rápido posible una vez aparezca la señal. Sensed mide el tiempo exacto, en milisegundos, entre la aparición del estímulo y tu respuesta.</li>
+    </ol>
+    <p>Si pulsas el botón antes de que aparezca la señal de picada, el lance se considera fallido por anticipación, igual que en pesca real un tirón prematuro de la caña antes de que el pez haya mordido el anzuelo no logra capturar nada.</p>
+
+    <h2>Por qué el intervalo de espera es aleatorio</h2>
+    <p>Si el estímulo apareciera siempre tras el mismo tiempo fijo, el jugador podría anticipar la respuesta basándose en el ritmo aprendido en lugar de en una reacción genuina al estímulo visual. Variar el intervalo entre dos y seis segundos obliga a mantener la atención sostenida durante todo el periodo de espera, lo que se aproxima mucho más a cómo se mide el tiempo de reacción en contextos científicos y deportivos reales.</p>
+
+    <h2>Niveles de captura</h2>
+    <p>Tu tiempo de reacción determina no solo tu puntuación, sino también qué tipo de pieza capturas, simulando que una reacción más rápida permite clavar mejor el anzuelo en peces más grandes y esquivos:</p>
+
+    <table class="score-table">
+      <tr><th>Tiempo de reacción</th><th>Puntos</th><th>Nivel de captura</th></tr>
+      <tr><td>0 – 260 ms</td><td>20</td><td>Capturas trofeo (siluros, carpas récord)</td></tr>
+      <tr><td>261 – 380 ms</td><td>10</td><td>Capturas notables (black bass, lucioperca)</td></tr>
+      <tr><td>381 – 500 ms</td><td>5</td><td>Capturas menores o sin pesca</td></tr>
+      <tr><td>Más de 500 ms</td><td>0</td><td>El pez escapa</td></tr>
+    </table>
+
+    <p>Las puntuaciones de los cinco lances se suman a tu marcador total de Pesca, acumulado junto al resto de modos de juego durante tu sesión.</p>
+
+    <h2>Consejos para mejorar</h2>
+    <ul>
+      <li>Mantén el cursor o el dedo ya posicionado sobre el botón antes de pulsar "Lanzar caña", de modo que no pierdas tiempo de reacción en el movimiento físico hacia el botón.</li>
+      <li>Evita parpadear o desviar la mirada durante la fase de espera; cualquier interrupción de la atención visual añade milisegundos a tu tiempo de respuesta.</li>
+      <li>El tiempo de reacción simple mejora con la práctica regular, pero tiene un límite fisiológico individual; no te frustres si no logras bajar de forma constante por debajo de los 200 ms, ya que está cerca del límite humano medible.</li>
+    </ul>
+
+    <a href="/" class="play-cta">Jugar ahora →</a>
+  </div>
+</body>
+</html>

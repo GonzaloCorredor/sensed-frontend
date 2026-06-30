@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reglas del juego de Tiempo — Sensed</title>
+  <meta name="description" content="Aprende cómo funciona el modo Tiempo de Sensed: estimación de duración sin reloj, sistema de puntuación y consejos para mejorar tu sentido temporal." />
+  <link rel="icon" type="image/png" href="logo.png">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono&family=DM+Sans:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .legal-wrap { max-width: 720px; margin: 0 auto; padding: 3rem 1.5rem; color: var(--text2); line-height: 1.75; }
+    .legal-wrap h1 { color: var(--text); font-size: 2.2rem; margin-bottom: 0.5rem; }
+    .legal-wrap .subtitle { color: var(--accent); font-family: var(--mono); font-size: 0.85rem; margin-bottom: 2rem; letter-spacing: 0.05em; }
+    .legal-wrap h2 { color: var(--text); font-size: 1.25rem; margin: 2.2rem 0 0.9rem; }
+    .legal-wrap p, .legal-wrap li { font-size: 0.97rem; }
+    .legal-wrap a { color: var(--accent); }
+    .legal-back { display: inline-block; margin-bottom: 2rem; color: var(--accent); text-decoration: none; font-family: var(--mono); font-size: 0.85rem; }
+    .legal-wrap ul, .legal-wrap ol { padding-left: 1.3rem; margin: 0.8rem 0; }
+    .legal-wrap li { margin-bottom: 0.4rem; }
+    .score-table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-family: var(--mono); font-size: 0.85rem; }
+    .score-table th, .score-table td { text-align: left; padding: 0.6rem 0.8rem; border-bottom: 1px solid var(--border); }
+    .score-table th { color: var(--text); }
+    .play-cta { display: inline-block; margin-top: 2.5rem; background: var(--accent); color: #000; font-family: var(--mono); font-weight: 700; padding: 0.9rem 1.8rem; border-radius: 10px; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <div class="legal-wrap">
+    <a href="/" class="legal-back">← volver a sensed</a>
+    <h1>Reglas del juego de Tiempo</h1>
+    <p class="subtitle">PRECISIÓN EN LA ESTIMACIÓN TEMPORAL</p>
+
+    <p>El modo Tiempo entrena un sentido que usamos constantemente en la vida diaria pero rara vez medimos: la capacidad de estimar cuánto tiempo ha transcurrido sin mirar un reloj. Este sentido interno, conocido en psicología como estimación de intervalo temporal, varía considerablemente entre personas y se ve afectado por factores como el nivel de atención, el estado emocional y, sobre todo, la práctica.</p>
+
+    <h2>Cómo se juega</h2>
+    <p>Cada partida consta de cinco rondas independientes. En cada ronda se te muestra un tiempo objetivo aleatorio, expresado en segundos con dos decimales, situado entre 1.5 y 5.5 segundos.</p>
+    <ol>
+      <li>Pulsa el botón "Empezar" para iniciar el cronómetro interno. A partir de ese momento no se muestra ningún temporizador visible: debes confiar únicamente en tu percepción del paso del tiempo.</li>
+      <li>Pulsa el mismo botón, ahora con la etiqueta "Detener", en el instante en que creas que se ha cumplido el tiempo objetivo mostrado al inicio de la ronda.</li>
+      <li>Sensed registra tu tiempo real y lo compara con el objetivo, mostrando la diferencia exacta en segundos.</li>
+    </ol>
+    <p>El reto puede completarse también mediante la barra espaciadora del teclado en lugar de hacer clic, lo que permite una respuesta más rápida y consistente en dispositivos de escritorio.</p>
+
+    <h2>Por qué el rango varía entre rondas</h2>
+    <p>Utilizar un tiempo objetivo distinto en cada ronda, en lugar de repetir siempre la misma duración, evita que el jugador memorice un patrón de movimiento o cuente mentalmente de forma mecánica, y obliga a que la estimación dependa realmente de la percepción temporal y no de un truco aprendido durante la propia partida.</p>
+
+    <h2>Cómo se calcula la puntuación</h2>
+    <p>La puntuación de cada ronda depende de la diferencia absoluta, en milisegundos, entre tu tiempo de respuesta y el objetivo:</p>
+
+    <table class="score-table">
+      <tr><th>Desviación</th><th>Puntos</th><th>Valoración</th></tr>
+      <tr><td>0 – 50 ms</td><td>20</td><td>Precisión perfecta</td></tr>
+      <tr><td>51 – 200 ms</td><td>10</td><td>Muy preciso</td></tr>
+      <tr><td>Más de 200 ms</td><td>0</td><td>Desviación amplia</td></tr>
+    </table>
+
+    <p>Las puntuaciones de las cinco rondas se acumulan en tu marcador total de Tiempo, visible en todo momento en la parte superior de la pantalla durante tu sesión.</p>
+
+    <h2>Consejos para mejorar</h2>
+    <ul>
+      <li>Evita contar números en voz alta o mentalmente como "uno, dos, tres": este método depende del ritmo de tu propio conteo, que varía con el estrés o el cansancio, y suele ser menos preciso que confiar en la sensación directa del paso del tiempo.</li>
+      <li>Intenta mantener una respiración estable durante la espera; la ansiedad acelera la percepción subjetiva del tiempo y suele provocar respuestas anticipadas.</li>
+      <li>Juega varias rondas seguidas en la misma sesión para calibrar tu sentido temporal con el feedback inmediato de cada intento.</li>
+    </ul>
+
+    <a href="/" class="play-cta">Jugar ahora →</a>
+  </div>
+</body>
+</html>

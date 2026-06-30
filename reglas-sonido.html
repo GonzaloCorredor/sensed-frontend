@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reglas del juego de Sonido — Sensed</title>
+  <meta name="description" content="Aprende cómo funciona el modo Sonido de Sensed: afinación por frecuencia, instrumentos disponibles y consejos para entrenar tu oído absoluto." />
+  <link rel="icon" type="image/png" href="logo.png">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono&family=DM+Sans:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .legal-wrap { max-width: 720px; margin: 0 auto; padding: 3rem 1.5rem; color: var(--text2); line-height: 1.75; }
+    .legal-wrap h1 { color: var(--text); font-size: 2.2rem; margin-bottom: 0.5rem; }
+    .legal-wrap .subtitle { color: var(--accent); font-family: var(--mono); font-size: 0.85rem; margin-bottom: 2rem; letter-spacing: 0.05em; }
+    .legal-wrap h2 { color: var(--text); font-size: 1.25rem; margin: 2.2rem 0 0.9rem; }
+    .legal-wrap p, .legal-wrap li { font-size: 0.97rem; }
+    .legal-wrap a { color: var(--accent); }
+    .legal-back { display: inline-block; margin-bottom: 2rem; color: var(--accent); text-decoration: none; font-family: var(--mono); font-size: 0.85rem; }
+    .legal-wrap ul, .legal-wrap ol { padding-left: 1.3rem; margin: 0.8rem 0; }
+    .legal-wrap li { margin-bottom: 0.4rem; }
+    .score-table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-family: var(--mono); font-size: 0.85rem; }
+    .score-table th, .score-table td { text-align: left; padding: 0.6rem 0.8rem; border-bottom: 1px solid var(--border); }
+    .score-table th { color: var(--text); }
+    .play-cta { display: inline-block; margin-top: 2.5rem; background: var(--accent); color: #000; font-family: var(--mono); font-weight: 700; padding: 0.9rem 1.8rem; border-radius: 10px; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <div class="legal-wrap">
+    <a href="/" class="legal-back">← volver a sensed</a>
+    <h1>Reglas del juego de Sonido</h1>
+    <p class="subtitle">AFINACIÓN Y RECONOCIMIENTO DE FRECUENCIAS</p>
+
+    <p>El modo Sonido entrena una de las habilidades auditivas más difíciles de desarrollar sin formación musical: el oído absoluto, es decir, la capacidad de identificar y reproducir una frecuencia sonora exacta sin necesidad de una nota de referencia constante. Mientras que el oído relativo (saber si una nota es más aguda o grave que otra) es relativamente común, el oído absoluto se considera una habilidad entrenable pero exigente.</p>
+
+    <h2>Cómo se juega</h2>
+    <p>Cada partida consta de cinco rondas, una por cada instrumento disponible en la plataforma: diapasón clásico, bajo eléctrico, saxofón alto, sintetizador analógico y flauta travesera. En cada ronda se genera una frecuencia objetivo aleatoria dentro del rango característico de ese instrumento.</p>
+    <ol>
+      <li>Pulsa el botón "Escuchar objetivo" para reproducir la nota que debes igualar. Dispones de un máximo de tres escuchas por ronda; úsalas con criterio, ya que una vez agotadas no podrás volver a oír el objetivo.</li>
+      <li>Ajusta el deslizador de frecuencia, expresado en Hercios (Hz), hasta que creas que coincide con la nota escuchada. El deslizador reproduce en tiempo real el tono que estás seleccionando, permitiéndote comparar auditivamente mientras ajustas.</li>
+      <li>Pulsa "Confirmar afinación" para registrar tu respuesta y ver cuánto te has desviado del objetivo real.</li>
+    </ol>
+
+    <h2>Por qué cambia el instrumento en cada ronda</h2>
+    <p>Cada instrumento utiliza un timbre y un rango de frecuencias distintos, lo que obliga a tu oído a adaptarse constantemente en lugar de memorizar un único patrón sonoro. El diapasón y la flauta producen ondas más puras y agudas, mientras que el bajo eléctrico trabaja en frecuencias graves donde la percepción de pequeñas diferencias es más difícil. Esta variedad simula mejor un entrenamiento auditivo real, donde el oído debe generalizar la habilidad en lugar de memorizar un solo sonido.</p>
+
+    <h2>Cómo se calcula la puntuación</h2>
+    <p>La puntuación de cada ronda depende de la diferencia en Hercios entre tu afinación y la frecuencia objetivo real:</p>
+
+    <table class="score-table">
+      <tr><th>Diferencia</th><th>Puntos</th><th>Valoración</th></tr>
+      <tr><td>0 Hz exactos</td><td>20</td><td>Afinación perfecta</td></tr>
+      <tr><td>1 – 10 Hz</td><td>10</td><td>Muy preciso</td></tr>
+      <tr><td>11 – 30 Hz</td><td>5</td><td>Ligeramente desafinado</td></tr>
+      <tr><td>Más de 30 Hz</td><td>0</td><td>Desafinado</td></tr>
+    </table>
+
+    <p>La suma de las cinco rondas se añade a tu marcador total de Sonido, visible en la barra de navegación durante toda tu sesión de juego.</p>
+
+    <h2>Consejos para mejorar</h2>
+    <ul>
+      <li>Reserva al menos una de tus tres escuchas para el final, justo antes de confirmar, como verificación de tu ajuste.</li>
+      <li>Presta atención a si la nota suena "más llena" o "más fina" que tu referencia, una pista útil para saber si debes subir o bajar la frecuencia.</li>
+      <li>El entrenamiento auditivo mejora con la exposición repetida. Jugar varias rondas seguidas durante varios días tiene más impacto que una sesión larga aislada.</li>
+    </ul>
+
+    <a href="/" class="play-cta">Jugar ahora →</a>
+  </div>
+</body>
+</html>
