@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+  <title>Juego de Sonido — Sensed</title>
+  <meta name="description" content="Escucha una frecuencia y afínala con el deslizador. Entrena tu oído absoluto con 5 instrumentos distintos en cada partida."/>
+  <link rel="icon" type="image/png" href="logo.png"/>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono&family=DM+Sans:wght@400;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8996240781633351" crossorigin="anonymous"></script>
+  <style>
+    .site-footer{padding:1.5rem;border-top:1px solid var(--border);text-align:center;font-family:var(--mono);font-size:.75rem;color:var(--text3);}
+    .site-footer a{color:var(--text3);text-decoration:none;margin:0 .4rem;}
+    .site-footer a:hover{color:var(--accent);}
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <a href="/" class="nav-logo">sensed</a>
+    <div class="nav-modes">
+      <a href="/color.html"  class="nav-btn">color</a>
+      <a href="/sonido.html" class="nav-btn active">sonido</a>
+      <a href="/tiempo.html" class="nav-btn">tiempo</a>
+      <a href="/pesca.html"  class="nav-btn">pesca</a>
+    </div>
+    <div class="nav-score-display" id="nav-score">0 pts</div>
+  </nav>
+
+  <!-- HOME SONIDO -->
+  <section class="screen active" id="screen-sound-home">
+    <div class="home-content">
+      <h1 class="home-title">¿Tienes buen oído?</h1>
+      <button class="btn-start" id="btn-sound-start">empezar</button>
+      <p class="seo-text">Escucha la nota objetivo de 5 instrumentos distintos y afínala con el deslizador de Hercios. Tienes 3 escuchas por ronda. Cuanto más exacta sea tu afinación, más puntos consigues.</p>
+      <p class="seo-text"><a href="/reglas-sonido.html" style="color:var(--accent);">Ver reglas detalladas →</a></p>
+    </div>
+    <div class="ad-safe-zone">
+      <ins class="adsbygoogle" style="display:block;width:100%;" data-ad-client="ca-pub-8996240781633351" data-ad-slot="1571160598" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+  </section>
+
+  <!-- GAME SONIDO -->
+  <section class="screen" id="screen-sound-game">
+    <div class="memorize-top">
+      <span class="round-label">RONDA <span id="sound-round-num">1</span>/5</span>
+    </div>
+    <div style="text-align:center;margin:2rem 0;">
+      <div id="sound-icon" style="font-size:4rem;">🥢</div>
+      <h2 id="sound-name" style="margin:.5rem 0;color:var(--text);">Diapasón</h2>
+      <p id="sound-desc" style="color:var(--text3);font-size:.9rem;">Afina la nota objetivo</p>
+    </div>
+    <button class="btn-start" id="btn-sound-play" style="display:block;margin:0 auto 2rem;width:100%;max-width:400px;">ESCUCHAR OBJETIVO (3/3)</button>
+    <div class="sound-controls">
+      <label>TU AFINACIÓN: <span id="sound-val">440</span> Hz</label>
+      <input type="range" id="slider-hz" min="100" max="1000" value="440" class="slider"/>
+    </div>
+    <button class="btn-start" id="btn-sound-confirm" style="display:block;margin:1rem auto 0;width:100%;max-width:400px;background:var(--success);">CONFIRMAR AFINACIÓN</button>
+  </section>
+
+  <div id="toast" class="toast"></div>
+
+  <footer class="site-footer">
+    <a href="/">Inicio</a>· <a href="/sobre.html">Sobre Sensed</a>· <a href="/reglas-sonido.html">Reglas</a>· <a href="/privacidad.html">Privacidad</a>· <a href="/contacto.html">Contacto</a>
+  </footer>
+
+  <script src="game-sonido.js"></script>
+</body>
+</html>

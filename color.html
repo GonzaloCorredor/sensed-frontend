@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+  <title>Juego de Color — Sensed</title>
+  <meta name="description" content="Memoriza un color y reprodúcelo ajustando tono, saturación y luminosidad. 5 rondas de entrenamiento de memoria cromática."/>
+  <link rel="icon" type="image/png" href="logo.png"/>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono&family=DM+Sans:wght@400;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8996240781633351" crossorigin="anonymous"></script>
+  <style>
+    .site-footer{padding:1.5rem;border-top:1px solid var(--border);text-align:center;font-family:var(--mono);font-size:.75rem;color:var(--text3);}
+    .site-footer a{color:var(--text3);text-decoration:none;margin:0 .4rem;}
+    .site-footer a:hover{color:var(--accent);}
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="/" class="nav-logo">sensed</a>
+    <div class="nav-modes">
+      <a href="/color.html"   class="nav-btn active">color</a>
+      <a href="/sonido.html"  class="nav-btn">sonido</a>
+      <a href="/tiempo.html"  class="nav-btn">tiempo</a>
+      <a href="/pesca.html"   class="nav-btn">pesca</a>
+    </div>
+    <div class="nav-score-display" id="nav-score">0 pts</div>
+  </nav>
+
+  <!-- HOME -->
+  <section class="screen active" id="screen-home">
+    <div class="home-content">
+      <h1 class="home-title">¿Recuerdas el color?</h1>
+      <button class="btn-start" id="btn-start">empezar</button>
+      <p class="seo-text">Memoriza un tono exacto durante 4 segundos y luego reprodúcelo ajustando matiz, saturación y luminosidad. 5 rondas, puntuación basada en la distancia perceptual real.</p>
+      <p class="seo-text"><a href="/reglas-color.html" style="color:var(--accent);">Ver reglas detalladas →</a></p>
+    </div>
+    <div class="ad-safe-zone">
+      <ins class="adsbygoogle" style="display:block;width:100%;" data-ad-client="ca-pub-8996240781633351" data-ad-slot="5227166707" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+  </section>
+
+  <!-- AUTH MODAL (invitado automático en esta página) -->
+  <section class="screen" id="screen-auth">
+    <div style="text-align:center;max-width:340px;margin:8vh auto 0;">
+      <h2 style="color:var(--text);margin-bottom:1.5rem;">Acceder para guardar puntos</h2>
+      <input type="text" id="auth-username" placeholder="Usuario" style="width:100%;padding:1rem;margin-bottom:.8rem;border-radius:8px;border:1px solid var(--text3);background:var(--bg);color:var(--text);font-size:1rem;"/>
+      <input type="password" id="auth-password" placeholder="Contraseña" style="width:100%;padding:1rem;margin-bottom:1.2rem;border-radius:8px;border:1px solid var(--text3);background:var(--bg);color:var(--text);font-size:1rem;"/>
+      <button class="btn-start" id="btn-auth-submit" style="width:100%;margin-bottom:.6rem;">ENTRAR</button>
+      <button class="btn-start" id="btn-guest" style="width:100%;background:transparent;border:1px solid var(--border2);color:var(--text2);">ENTRAR COMO INVITADO</button>
+      <p style="color:var(--text3);font-size:.85rem;margin-top:1rem;">
+        <span id="auth-toggle-text">¿No tienes cuenta?</span>
+        <a href="#" id="btn-auth-toggle" style="color:var(--accent);font-weight:700;text-decoration:none;">Regístrate</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- MEMORIZE -->
+  <section class="screen" id="screen-color-memorize">
+    <div class="memorize-top">
+      <span class="round-label">RONDA <span id="color-round-num">1</span>/5</span>
+      <div class="timer-bar-wrap"><div class="timer-bar" id="timer-bar"></div></div>
+    </div>
+    <div class="color-display" id="color-display"></div>
+    <p class="memorize-hint">Memoriza este color...</p>
+  </section>
+
+  <!-- GUESS -->
+  <section class="screen" id="screen-color-guess">
+    <div class="guess-top">
+      <span class="round-label">RONDA <span id="color-guess-num">1</span>/5</span>
+    </div>
+    <div class="color-display" id="color-preview-box" style="height:150px;margin-bottom:2rem;"></div>
+    <div class="slider-group">
+      <label>Tono (H): <span id="val-h">0</span></label>
+      <input type="range" id="slider-h" min="0" max="360" value="0" class="slider"/>
+    </div>
+    <div class="slider-group">
+      <label>Saturación (S): <span id="val-s">0</span>%</label>
+      <input type="range" id="slider-s" min="0" max="100" value="0" class="slider"/>
+    </div>
+    <div class="slider-group">
+      <label>Luminosidad (L): <span id="val-l">0</span>%</label>
+      <input type="range" id="slider-l" min="0" max="100" value="0" class="slider"/>
+    </div>
+    <button class="btn-start" id="btn-color-confirm" style="display:block;margin:1rem auto 0;width:100%;max-width:400px;">CONFIRMAR COLOR</button>
+  </section>
+
+  <!-- RESULT -->
+  <section class="screen" id="screen-color-result">
+    <div style="display:flex;gap:1rem;justify-content:center;margin:2rem 0;">
+      <div style="text-align:center;">
+        <div id="result-original" style="width:100px;height:100px;border-radius:12px;"></div>
+        <p style="margin-top:.5rem;color:var(--text3);font-size:.8rem;">ORIGINAL</p>
+      </div>
+      <div style="text-align:center;">
+        <div id="result-guess" style="width:100px;height:100px;border-radius:12px;"></div>
+        <p style="margin-top:.5rem;color:var(--text3);font-size:.8rem;">TUYO</p>
+      </div>
+    </div>
+    <div style="text-align:center;">
+      <div id="result-score-big" style="font-size:4rem;font-family:var(--mono);font-weight:700;color:var(--accent);">0.0</div>
+      <p id="result-comment" style="color:var(--text2);font-size:1.2rem;"></p>
+    </div>
+    <button class="btn-start" id="btn-next-color" style="display:block;margin:2rem auto 0;width:100%;max-width:400px;">SIGUIENTE RONDA</button>
+  </section>
+
+  <!-- FINAL -->
+  <section class="screen" id="screen-final">
+    <div style="text-align:center;margin:2rem 0;">
+      <h2 style="color:var(--text3);font-size:1.1rem;">PUNTUACIÓN FINAL</h2>
+      <div id="final-score-big" style="font-size:5rem;font-family:var(--mono);font-weight:700;color:var(--accent);">0</div>
+      <p id="final-grade" style="color:var(--text2);font-size:1.4rem;font-weight:700;"></p>
+    </div>
+    <div id="final-swatches" style="display:flex;flex-direction:column;gap:.5rem;margin-bottom:2rem;"></div>
+    <button class="btn-start" id="btn-play-again" style="display:block;margin:0 auto;width:100%;max-width:400px;">VOLVER AL INICIO</button>
+    <div class="ad-safe-zone">
+      <ins class="adsbygoogle" style="display:block;width:100%;" data-ad-client="ca-pub-8996240781633351" data-ad-slot="8808025938" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+  </section>
+
+  <div id="toast" class="toast"></div>
+
+  <footer class="site-footer">
+    <a href="/">Inicio</a>· <a href="/sobre.html">Sobre Sensed</a>· <a href="/reglas-color.html">Reglas</a>· <a href="/privacidad.html">Privacidad</a>· <a href="/contacto.html">Contacto</a>
+  </footer>
+
+  <script src="game-color.js"></script>
+</body>
+</html>

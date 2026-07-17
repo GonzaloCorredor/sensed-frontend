@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+  <title>Juego de Tiempo — Sensed</title>
+  <meta name="description" content="Detén el cronómetro exactamente en el tiempo indicado sin mirar ningún reloj. Entrena tu sentido interno del tiempo en 5 rondas."/>
+  <link rel="icon" type="image/png" href="logo.png"/>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono&family=DM+Sans:wght@400;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8996240781633351" crossorigin="anonymous"></script>
+  <style>
+    .site-footer{padding:1.5rem;border-top:1px solid var(--border);text-align:center;font-family:var(--mono);font-size:.75rem;color:var(--text3);}
+    .site-footer a{color:var(--text3);text-decoration:none;margin:0 .4rem;}
+    .site-footer a:hover{color:var(--accent);}
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <a href="/" class="nav-logo">sensed</a>
+    <div class="nav-modes">
+      <a href="/color.html"  class="nav-btn">color</a>
+      <a href="/sonido.html" class="nav-btn">sonido</a>
+      <a href="/tiempo.html" class="nav-btn active">tiempo</a>
+      <a href="/pesca.html"  class="nav-btn">pesca</a>
+    </div>
+    <div class="nav-score-display" id="nav-score">0 pts</div>
+  </nav>
+
+  <!-- HOME TIEMPO -->
+  <section class="screen active" id="screen-time-home">
+    <div class="home-content">
+      <h1 class="home-title">¿Mides bien el tiempo?</h1>
+      <button class="btn-start" id="btn-time-start">empezar</button>
+      <p class="seo-text">Se te asigna un tiempo objetivo entre 1.5 y 5.5 segundos. Inicia el cronómetro y detén cuando creas que ha transcurrido ese tiempo exacto, sin mirar ningún reloj. 5 rondas de precisión temporal.</p>
+      <p class="seo-text"><a href="/reglas-tiempo.html" style="color:var(--accent);">Ver reglas detalladas →</a></p>
+    </div>
+    <div class="ad-safe-zone">
+      <ins class="adsbygoogle" style="display:block;width:100%;" data-ad-client="ca-pub-8996240781633351" data-ad-slot="6308481958" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+  </section>
+
+  <!-- GAME TIEMPO -->
+  <section class="screen" id="screen-time-game">
+    <div class="memorize-top">
+      <span class="round-label">RONDA <span id="time-round-num">1</span>/5</span>
+    </div>
+    <div style="text-align:center;margin-top:2rem;">
+      <h2 style="color:var(--text3);font-size:1rem;">Detén el cronómetro a los:</h2>
+      <div id="time-target" style="font-size:4rem;font-family:var(--mono);font-weight:700;color:var(--accent);margin:1rem 0;">0.00s</div>
+    </div>
+    <button class="btn-start" id="btn-time-action" style="margin:2rem auto 0;width:100%;max-width:400px;height:120px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;">
+      <span id="time-btn-title" style="font-size:2rem;">EMPEZAR</span>
+      <span id="time-btn-sub" style="font-size:.9rem;opacity:.8;">Haz clic para iniciar</span>
+    </button>
+    <div id="time-result-text" style="text-align:center;margin-top:2rem;font-size:1.2rem;font-weight:700;min-height:2rem;"></div>
+  </section>
+
+  <div id="toast" class="toast"></div>
+
+  <footer class="site-footer">
+    <a href="/">Inicio</a>· <a href="/sobre.html">Sobre Sensed</a>· <a href="/reglas-tiempo.html">Reglas</a>· <a href="/privacidad.html">Privacidad</a>· <a href="/contacto.html">Contacto</a>
+  </footer>
+
+  <script src="game-tiempo.js"></script>
+</body>
+</html>

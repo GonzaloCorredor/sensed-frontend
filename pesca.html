@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+  <title>Juego de Pesca — Sensed</title>
+  <meta name="description" content="Reacciona a la picada lo más rápido posible. Cuanto más rápidos sean tus reflejos, mayor será la captura. 5 lances por jornada."/>
+  <link rel="icon" type="image/png" href="logo.png"/>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono&family=DM+Sans:wght@400;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8996240781633351" crossorigin="anonymous"></script>
+  <style>
+    .site-footer{padding:1.5rem;border-top:1px solid var(--border);text-align:center;font-family:var(--mono);font-size:.75rem;color:var(--text3);}
+    .site-footer a{color:var(--text3);text-decoration:none;margin:0 .4rem;}
+    .site-footer a:hover{color:var(--accent);}
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <a href="/" class="nav-logo">sensed</a>
+    <div class="nav-modes">
+      <a href="/color.html"  class="nav-btn">color</a>
+      <a href="/sonido.html" class="nav-btn">sonido</a>
+      <a href="/tiempo.html" class="nav-btn">tiempo</a>
+      <a href="/pesca.html"  class="nav-btn active">pesca</a>
+    </div>
+    <div class="nav-score-display" id="nav-score">0 pts</div>
+  </nav>
+
+  <!-- HOME PESCA -->
+  <section class="screen active" id="screen-fishing-home">
+    <div class="home-content">
+      <h1 class="home-title">Jornada de Pesca</h1>
+      <button class="btn-start" id="btn-fishing-start">empezar</button>
+      <p class="seo-text">Lanza la caña y espera la picada. En un momento aleatorio el botón cambiará de color: reacciona lo más rápido posible para clavar el anzuelo. Cuanto menor sea tu tiempo de reacción, mayor será la captura.</p>
+      <p class="seo-text"><a href="/reglas-pesca.html" style="color:var(--accent);">Ver reglas detalladas →</a></p>
+    </div>
+    <div class="ad-safe-zone">
+      <ins class="adsbygoogle" style="display:block;width:100%;" data-ad-client="ca-pub-8996240781633351" data-ad-slot="9617171573" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+  </section>
+
+  <!-- GAME PESCA -->
+  <section class="screen" id="screen-fishing-game">
+    <div class="memorize-top">
+      <span class="round-label">LANCE <span id="fishing-round-num">1</span>/5</span>
+    </div>
+    <div style="text-align:center;margin-top:2rem;">
+      <h2 style="color:var(--text3);font-size:1rem;">Tiempo de reacción:</h2>
+      <div id="fish-reaction-time" style="font-size:3rem;font-family:var(--mono);font-weight:700;color:var(--accent);margin:1rem 0;">-- ms</div>
+    </div>
+    <button class="btn-start" id="btn-fish-action" style="margin:2rem auto 0;width:100%;max-width:400px;height:150px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;background-color:#3b82f6;">
+      <span id="fish-btn-title" style="font-size:2rem;">LANZAR CAÑA</span>
+      <span id="fish-btn-sub" style="font-size:.9rem;opacity:.8;">Haz clic para lanzar</span>
+    </button>
+    <div id="fish-result-text" style="text-align:center;margin-top:2rem;font-size:1.1rem;font-weight:700;min-height:3rem;padding:0 1rem;"></div>
+  </section>
+
+  <div id="toast" class="toast"></div>
+
+  <footer class="site-footer">
+    <a href="/">Inicio</a>· <a href="/sobre.html">Sobre Sensed</a>· <a href="/reglas-pesca.html">Reglas</a>· <a href="/privacidad.html">Privacidad</a>· <a href="/contacto.html">Contacto</a>
+  </footer>
+
+  <script src="game-pesca.js"></script>
+</body>
+</html>
