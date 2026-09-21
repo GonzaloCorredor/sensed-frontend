@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
-  <title>Juego de Sonido — Sensed</title>
-  <meta name="description" content="Escucha una frecuencia y afínala con el deslizador. Entrena tu oído absoluto con 5 instrumentos distintos en cada partida."/>
+  <title>Juego de Sonido y Afinación — Sensed</title>
+  <meta name="description" content="Entrena tu oído absoluto con el modo Sonido de Sensed. Escucha la frecuencia objetivo de 5 instrumentos distintos y afínala con el deslizador de Hercios. ¿Cuánto se acerca tu oído a la perfección?"/>
   <link rel="icon" type="image/png" href="logo.png"/>
   <link href="https://fonts.googleapis.com/css2?family=Space+Mono&family=DM+Sans:wght@400;700&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="style.css"/>
@@ -13,6 +13,12 @@
     .site-footer{padding:1.5rem;border-top:1px solid var(--border);text-align:center;font-family:var(--mono);font-size:.75rem;color:var(--text3);}
     .site-footer a{color:var(--text3);text-decoration:none;margin:0 .4rem;}
     .site-footer a:hover{color:var(--accent);}
+    .content-block{text-align:left;background:var(--bg2);padding:1.5rem;border-radius:8px;margin-top:2rem;border:1px solid var(--border);}
+    .content-block h2{color:var(--accent);font-size:1.2rem;margin-bottom:1rem;}
+    .content-block h3{color:var(--text);font-size:1rem;margin:1.2rem 0 .6rem;}
+    .content-block p{color:var(--text2);font-size:.93rem;line-height:1.75;margin-bottom:.9rem;}
+    .content-block ul{color:var(--text2);font-size:.93rem;line-height:1.75;padding-left:1.2rem;margin-bottom:.9rem;}
+    .content-block li{margin-bottom:.4rem;}
   </style>
 </head>
 <body>
@@ -27,13 +33,50 @@
     <div class="nav-score-display" id="nav-score">0 pts</div>
   </nav>
 
+  <!-- AUTH -->
+  <section class="screen" id="screen-auth">
+    <div style="text-align:center;max-width:340px;margin:8vh auto 0;">
+      <h2 id="auth-title" style="color:var(--text);margin-bottom:1.5rem;">Iniciar Sesión</h2>
+      <input type="text" id="auth-username" placeholder="Usuario" style="width:100%;padding:1rem;margin-bottom:.8rem;border-radius:8px;border:1px solid var(--text3);background:var(--bg);color:var(--text);font-size:1rem;"/>
+      <input type="password" id="auth-password" placeholder="Contraseña" style="width:100%;padding:1rem;margin-bottom:1.2rem;border-radius:8px;border:1px solid var(--text3);background:var(--bg);color:var(--text);font-size:1rem;"/>
+      <button class="btn-start" id="btn-auth-submit" style="width:100%;margin-bottom:.6rem;">ENTRAR</button>
+      <button class="btn-start" id="btn-guest" style="width:100%;background:transparent;border:1px solid var(--border2);color:var(--text2);">ENTRAR COMO INVITADO</button>
+      <p style="color:var(--text3);font-size:.85rem;margin-top:1rem;">
+        <span id="auth-toggle-text">¿No tienes cuenta?</span>
+        <a href="#" id="btn-auth-toggle" style="color:var(--accent);font-weight:700;text-decoration:none;">Regístrate</a>
+      </p>
+    </div>
+  </section>
+
   <!-- HOME SONIDO -->
   <section class="screen active" id="screen-sound-home">
     <div class="home-content">
       <h1 class="home-title">¿Tienes buen oído?</h1>
       <button class="btn-start" id="btn-sound-start">empezar</button>
-      <p class="seo-text">Escucha la nota objetivo de 5 instrumentos distintos y afínala con el deslizador de Hercios. Tienes 3 escuchas por ronda. Cuanto más exacta sea tu afinación, más puntos consigues.</p>
-      <p class="seo-text"><a href="/reglas-sonido.html" style="color:var(--accent);">Ver reglas detalladas →</a></p>
+
+      <div class="content-block">
+        <h2>Entrenamiento de Oído Absoluto</h2>
+        <p>El modo Sonido de Sensed pone a prueba una de las habilidades auditivas más difíciles de desarrollar sin formación musical formal: el <strong>oído absoluto</strong>, es decir, la capacidad de identificar y reproducir una frecuencia sonora exacta sin ninguna nota de referencia externa.</p>
+        <p>En cada partida se generan cinco rondas de afinación, una por cada instrumento disponible en la plataforma. La nota objetivo de cada ronda se elige de forma aleatoria dentro del rango de frecuencias característico de ese instrumento, lo que significa que cada partida es completamente distinta.</p>
+
+        <h3>¿Cómo funciona el juego?</h3>
+        <p>Al comenzar cada ronda, dispondrás de un máximo de tres escuchas del sonido objetivo. Cada vez que pulses el botón de escucha, el sistema reproducirá la frecuencia meta durante aproximadamente un segundo. Úsalas con criterio: cuantas más escuchas gastes, menos información de referencia tendrás para las siguientes partidas.</p>
+        <p>Una vez hayas escuchado la nota, ajusta el deslizador de <strong>Hercios (Hz)</strong> hasta que creas que coincide con la frecuencia objetivo. El deslizador reproduce en tiempo real el tono que estás seleccionando, lo que te permite comparar auditivamente mientras afinas. Cuando estés listo, confirma tu afinación para ver el resultado.</p>
+
+        <h3>Los cinco instrumentos</h3>
+        <ul>
+          <li><strong>Diapasón Clásico</strong> — onda sinusoidal pura entre 250 y 500 Hz. El más limpio y exigente.</li>
+          <li><strong>Bajo Eléctrico</strong> — frecuencias graves entre 80 y 250 Hz, donde las diferencias son más difíciles de percibir.</li>
+          <li><strong>Saxofón Alto</strong> — onda de sierra entre 200 y 800 Hz, con un timbre agresivo y reconocible.</li>
+          <li><strong>Sintetizador Analógico</strong> — onda cuadrada entre 300 y 900 Hz, el sonido retro de los 8 bits.</li>
+          <li><strong>Flauta Travesera</strong> — onda sinusoidal aguda entre 500 y 1200 Hz, cristalina y difícil de afinar.</li>
+        </ul>
+
+        <h3>Sistema de puntuación</h3>
+        <p>Cada ronda puntúa en función de tu margen de error en Hercios respecto a la frecuencia objetivo real. Una afinación exacta otorga 20 puntos; menos de 10 Hz de diferencia otorga 10 puntos; hasta 30 Hz de diferencia otorga 5 puntos; por encima de 30 Hz no suma puntos. La puntuación máxima por partida completa es de 100 puntos.</p>
+
+        <p><a href="/reglas-sonido.html" style="color:var(--accent);">Leer las reglas completas →</a></p>
+      </div>
     </div>
     <div class="ad-safe-zone">
       <ins class="adsbygoogle" style="display:block;width:100%;" data-ad-client="ca-pub-8996240781633351" data-ad-slot="1571160598" data-ad-format="auto" data-full-width-responsive="true"></ins>
@@ -62,10 +105,11 @@
   <div id="toast" class="toast"></div>
 
   <footer class="site-footer">
-    <a href="/">Inicio</a>· 
-    <a href="/sobre.html">Sobre Sensed</a>· 
-    <a href="/reglas.html">Instrucciones</a>· 
-    <a href="/aviso-legal.html">Aviso Legal y Privacidad</a>· 
+    <a href="/">Inicio</a>·
+    <a href="/sobre.html">Sobre Sensed</a>·
+    <a href="/reglas-sonido.html">Reglas Sonido</a>·
+    <a href="/privacidad.html">Privacidad</a>·
+    <a href="/aviso-legal.html">Aviso Legal</a>·
     <a href="/contacto.html">Contacto</a>
   </footer>
 

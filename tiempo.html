@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
-  <title>Juego de Tiempo — Sensed</title>
-  <meta name="description" content="Detén el cronómetro exactamente en el tiempo indicado sin mirar ningún reloj. Entrena tu sentido interno del tiempo en 5 rondas."/>
+  <title>Juego de Tiempo y Precisión Temporal — Sensed</title>
+  <meta name="description" content="Entrena tu sentido interno del tiempo con el modo Tiempo de Sensed. Detén el cronómetro exactamente en el segundo indicado sin mirar ningún reloj. 5 rondas de precisión temporal."/>
   <link rel="icon" type="image/png" href="logo.png"/>
   <link href="https://fonts.googleapis.com/css2?family=Space+Mono&family=DM+Sans:wght@400;700&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="style.css"/>
@@ -13,6 +13,12 @@
     .site-footer{padding:1.5rem;border-top:1px solid var(--border);text-align:center;font-family:var(--mono);font-size:.75rem;color:var(--text3);}
     .site-footer a{color:var(--text3);text-decoration:none;margin:0 .4rem;}
     .site-footer a:hover{color:var(--accent);}
+    .content-block{text-align:left;background:var(--bg2);padding:1.5rem;border-radius:8px;margin-top:2rem;border:1px solid var(--border);}
+    .content-block h2{color:var(--accent);font-size:1.2rem;margin-bottom:1rem;}
+    .content-block h3{color:var(--text);font-size:1rem;margin:1.2rem 0 .6rem;}
+    .content-block p{color:var(--text2);font-size:.93rem;line-height:1.75;margin-bottom:.9rem;}
+    .content-block ul{color:var(--text2);font-size:.93rem;line-height:1.75;padding-left:1.2rem;margin-bottom:.9rem;}
+    .content-block li{margin-bottom:.4rem;}
   </style>
 </head>
 <body>
@@ -27,13 +33,49 @@
     <div class="nav-score-display" id="nav-score">0 pts</div>
   </nav>
 
+  <!-- AUTH -->
+  <section class="screen" id="screen-auth">
+    <div style="text-align:center;max-width:340px;margin:8vh auto 0;">
+      <h2 id="auth-title" style="color:var(--text);margin-bottom:1.5rem;">Iniciar Sesión</h2>
+      <input type="text" id="auth-username" placeholder="Usuario" style="width:100%;padding:1rem;margin-bottom:.8rem;border-radius:8px;border:1px solid var(--text3);background:var(--bg);color:var(--text);font-size:1rem;"/>
+      <input type="password" id="auth-password" placeholder="Contraseña" style="width:100%;padding:1rem;margin-bottom:1.2rem;border-radius:8px;border:1px solid var(--text3);background:var(--bg);color:var(--text);font-size:1rem;"/>
+      <button class="btn-start" id="btn-auth-submit" style="width:100%;margin-bottom:.6rem;">ENTRAR</button>
+      <button class="btn-start" id="btn-guest" style="width:100%;background:transparent;border:1px solid var(--border2);color:var(--text2);">ENTRAR COMO INVITADO</button>
+      <p style="color:var(--text3);font-size:.85rem;margin-top:1rem;">
+        <span id="auth-toggle-text">¿No tienes cuenta?</span>
+        <a href="#" id="btn-auth-toggle" style="color:var(--accent);font-weight:700;text-decoration:none;">Regístrate</a>
+      </p>
+    </div>
+  </section>
+
   <!-- HOME TIEMPO -->
   <section class="screen active" id="screen-time-home">
     <div class="home-content">
       <h1 class="home-title">¿Mides bien el tiempo?</h1>
       <button class="btn-start" id="btn-time-start">empezar</button>
-      <p class="seo-text">Se te asigna un tiempo objetivo entre 1.5 y 5.5 segundos. Inicia el cronómetro y detén cuando creas que ha transcurrido ese tiempo exacto, sin mirar ningún reloj. 5 rondas de precisión temporal.</p>
-      <p class="seo-text"><a href="/reglas-tiempo.html" style="color:var(--accent);">Ver reglas detalladas →</a></p>
+
+      <div class="content-block">
+        <h2>Entrenamiento de Precisión Temporal</h2>
+        <p>El modo Tiempo entrena un sentido que usamos constantemente en la vida diaria pero rara vez medimos con precisión: la capacidad de estimar cuánto tiempo ha transcurrido sin mirar un reloj. Este sentido interno, conocido en psicología como <strong>estimación de intervalo temporal</strong>, varía considerablemente entre personas y se ve afectado por factores como el nivel de atención, el estado emocional y, sobre todo, la práctica deliberada.</p>
+        <p>Los pilotos de carreras, los músicos que tocan en conjunto y los deportistas que toman decisiones tácticas bajo presión dependen de un sentido del tiempo extraordinariamente calibrado. Con el modo Tiempo de Sensed puedes medir y mejorar esta habilidad desde cualquier dispositivo, en sesiones de apenas unos minutos.</p>
+
+        <h3>¿Cómo funciona el juego?</h3>
+        <p>Al comenzar cada ronda, el sistema te mostrará un <strong>tiempo objetivo aleatorio</strong> expresado en segundos con dos decimales, situado entre 1.5 y 5.5 segundos. Tu misión es pulsar el botón de inicio y volver a pulsarlo exactamente cuando creas que ha transcurrido ese tiempo, sin mirar ningún temporizador ni contador. A partir del momento en que inicias la ronda, la pantalla no muestra ningún indicador del tiempo transcurrido.</p>
+        <p>Una vez detengas el cronómetro, el sistema revela tu tiempo real y la diferencia exacta respecto al objetivo, positiva o negativa, expresada en segundos. Cuanto más cerca esté tu respuesta del objetivo, más puntos consigues en esa ronda.</p>
+
+        <h3>Por qué el objetivo varía en cada ronda</h3>
+        <p>Si el tiempo objetivo fuera siempre el mismo, podrías memorizarlo o entrenarte para contar de forma mecánica hasta ese punto concreto. Variar el objetivo entre rondas obliga a que la estimación dependa realmente de tu percepción interna del tiempo, que es la habilidad que este modo busca desarrollar.</p>
+
+        <h3>Sistema de puntuación</h3>
+        <ul>
+          <li><strong>0 a 50 ms de desviación</strong> — Precisión perfecta: 20 puntos.</li>
+          <li><strong>51 a 200 ms de desviación</strong> — Muy preciso: 10 puntos.</li>
+          <li><strong>Más de 200 ms de desviación</strong> — Sin puntos en esa ronda.</li>
+        </ul>
+        <p>Las cinco rondas suman hasta un máximo de 100 puntos por partida. También puedes usar la barra espaciadora del teclado en lugar del botón para reaccionar con mayor precisión en escritorio.</p>
+
+        <p><a href="/reglas-tiempo.html" style="color:var(--accent);">Leer las reglas completas →</a></p>
+      </div>
     </div>
     <div class="ad-safe-zone">
       <ins class="adsbygoogle" style="display:block;width:100%;" data-ad-client="ca-pub-8996240781633351" data-ad-slot="6308481958" data-ad-format="auto" data-full-width-responsive="true"></ins>
@@ -60,10 +102,11 @@
   <div id="toast" class="toast"></div>
 
   <footer class="site-footer">
-    <a href="/">Inicio</a>· 
-    <a href="/sobre.html">Sobre Sensed</a>· 
-    <a href="/reglas.html">Instrucciones</a>· 
-    <a href="/aviso-legal.html">Aviso Legal y Privacidad</a>· 
+    <a href="/">Inicio</a>·
+    <a href="/sobre.html">Sobre Sensed</a>·
+    <a href="/reglas-tiempo.html">Reglas Tiempo</a>·
+    <a href="/privacidad.html">Privacidad</a>·
+    <a href="/aviso-legal.html">Aviso Legal</a>·
     <a href="/contacto.html">Contacto</a>
   </footer>
 
