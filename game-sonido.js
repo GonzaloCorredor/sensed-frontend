@@ -9,6 +9,55 @@ updateScore();
 
 function showScreen(id){document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));const t=$(id);if(t)t.classList.add("active");}
 
+// ── AUTH ──────────────────────────────────────────────
+const baseUrl = "https://sensed-production.up.railway.app/api/auth";
+let isLoginMode = true;
+let currentUser = null;
+const saved = localStorage.getItem("sensed_user");
+if (saved) { currentUser = JSON.parse(saved); }
+
+function showAuthIfNeeded(onSuccess) {
+    if (currentUser) { onSuccess(); return; }
+    showScreen("screen-auth");
+    window._authCallback = onSuccess;
+}
+
+const btnToggle = $("btn-auth-toggle");
+if (btnToggle) btnToggle.addEventListener("click", e => {
+    e.preventDefault(); isLoginMode = !isLoginMode;
+    $("auth-title") && ($("auth-title").textContent = isLoginMode ? "Iniciar Sesión" : "Crear Cuenta");
+    $("btn-auth-submit").textContent = isLoginMode ? "ENTRAR" : "REGISTRARSE";
+    $("auth-toggle-text").textContent = isLoginMode ? "¿No tienes cuenta?" : "¿Ya tienes cuenta?";
+    btnToggle.textContent = isLoginMode ? "Regístrate" : "Inicia sesión";
+});
+
+const btnSubmit = $("btn-auth-submit");
+if (btnSubmit) btnSubmit.addEventListener("click", async e => {
+    e.preventDefault();
+    const u = $("auth-username").value.trim(), p = $("auth-password").value.trim();
+    if (!u || !p) { alert("Rellena todos los campos."); return; }
+    try {
+        const r = await fetch(`${baseUrl}/${isLoginMode ? "login" : "registro"}`, {
+            method: "POST", headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ username: u, password: p })
+        });
+        if (r.ok) {
+            currentUser = { username: u, isGuest: false };
+            localStorage.setItem("sensed_user", JSON.stringify(currentUser));
+            showScreen("screen-sound-home");
+            if (window._authCallback) { window._authCallback(); window._authCallback = null; }
+        } else { alert("Usuario o contraseña incorrectos."); }
+    } catch { alert("Error de conexión."); }
+});
+
+const btnGuest = $("btn-guest");
+if (btnGuest) btnGuest.addEventListener("click", () => {
+    currentUser = { username: "Invitado_" + rand(1000, 9999), isGuest: true };
+    showScreen("screen-sound-home");
+    if (window._authCallback) { window._authCallback(); window._authCallback = null; }
+});
+// ── FIN AUTH ──────────────────────────────────────────
+
 let audioCtx=null,userOsc=null,currentTargetFreq=0,soundRound=0,soundTotal=0,soundListens=0;
 const instruments=[
     {name:"Diapasón Clásico",icon:"🥢",type:"sine",min:250,max:500,desc:"Onda pura. Busca la claridad perfecta."},
@@ -21,7 +70,11 @@ const instruments=[
 function initAudio(){if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();if(audioCtx.state==="suspended")audioCtx.resume();}
 function stopUserTone(){if(userOsc){userOsc.stop();userOsc.disconnect();userOsc=null;}}
 
-$("btn-sound-start").addEventListener("click",()=>{soundRound=0;soundTotal=0;showScreen("screen-sound-game");loadRound();});
+$("btn-sound-start").addEventListener("click",()=>{
+    showAuthIfNeeded(() => {
+        soundRound=0;soundTotal=0;showScreen("screen-sound-game");loadRound();
+    });
+});
 
 function loadRound(){
     if(soundRound>=5){showToast(`¡Terminado! +${soundTotal} pts`,3000);updateScore(soundTotal);showScreen("screen-sound-home");return;}
