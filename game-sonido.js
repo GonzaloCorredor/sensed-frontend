@@ -13,8 +13,13 @@ function showScreen(id){document.querySelectorAll(".screen").forEach(s=>s.classL
 const baseUrl = "https://sensed-production.up.railway.app/api/auth";
 let isLoginMode = true;
 let currentUser = null;
+
+// Si ya hay sesión guardada, ir directo al juego sin pedir login
 const saved = localStorage.getItem("sensed_user");
-if (saved) { currentUser = JSON.parse(saved); }
+if (saved) {
+    currentUser = JSON.parse(saved);
+    showScreen("screen-sound-home");
+}
 
 function showAuthIfNeeded(onSuccess) {
     if (currentUser) { onSuccess(); return; }
@@ -53,10 +58,12 @@ if (btnSubmit) btnSubmit.addEventListener("click", async e => {
 const btnGuest = $("btn-guest");
 if (btnGuest) btnGuest.addEventListener("click", () => {
     currentUser = { username: "Invitado_" + rand(1000, 9999), isGuest: true };
+    localStorage.setItem("sensed_user", JSON.stringify(currentUser));
     showScreen("screen-sound-home");
     if (window._authCallback) { window._authCallback(); window._authCallback = null; }
 });
 // ── FIN AUTH ──────────────────────────────────────────
+
 
 let audioCtx=null,userOsc=null,currentTargetFreq=0,soundRound=0,soundTotal=0,soundListens=0;
 const instruments=[
@@ -70,11 +77,7 @@ const instruments=[
 function initAudio(){if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();if(audioCtx.state==="suspended")audioCtx.resume();}
 function stopUserTone(){if(userOsc){userOsc.stop();userOsc.disconnect();userOsc=null;}}
 
-$("btn-sound-start").addEventListener("click",()=>{
-    showAuthIfNeeded(() => {
-        soundRound=0;soundTotal=0;showScreen("screen-sound-game");loadRound();
-    });
-});
+$("btn-sound-start").addEventListener("click",()=>{ showAuthIfNeeded(()=>{soundRound=0;soundTotal=0;showScreen("screen-sound-game");loadRound();}); });
 
 function loadRound(){
     if(soundRound>=5){showToast(`¡Terminado! +${soundTotal} pts`,3000);updateScore(soundTotal);showScreen("screen-sound-home");return;}

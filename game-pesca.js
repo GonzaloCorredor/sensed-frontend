@@ -13,8 +13,13 @@ function showScreen(id){document.querySelectorAll(".screen").forEach(s=>s.classL
 const baseUrl = "https://sensed-production.up.railway.app/api/auth";
 let isLoginMode = true;
 let currentUser = null;
+
+// Si ya hay sesión guardada, ir directo al juego sin pedir login
 const saved = localStorage.getItem("sensed_user");
-if (saved) { currentUser = JSON.parse(saved); }
+if (saved) {
+    currentUser = JSON.parse(saved);
+    showScreen("screen-fishing-home");
+}
 
 function showAuthIfNeeded(onSuccess) {
     if (currentUser) { onSuccess(); return; }
@@ -53,18 +58,16 @@ if (btnSubmit) btnSubmit.addEventListener("click", async e => {
 const btnGuest = $("btn-guest");
 if (btnGuest) btnGuest.addEventListener("click", () => {
     currentUser = { username: "Invitado_" + rand(1000, 9999), isGuest: true };
+    localStorage.setItem("sensed_user", JSON.stringify(currentUser));
     showScreen("screen-fishing-home");
     if (window._authCallback) { window._authCallback(); window._authCallback = null; }
 });
 // ── FIN AUTH ──────────────────────────────────────────
 
+
 let fishState="idle",fishTimeout=null,biteStart=0,fishRound=0,fishTotal=0;
 
-$("btn-fishing-start").addEventListener("click",()=>{
-    showAuthIfNeeded(() => {
-        fishRound=0;fishTotal=0;showScreen("screen-fishing-game");resetLance();
-    });
-});
+$("btn-fishing-start").addEventListener("click",()=>{ showAuthIfNeeded(()=>{fishRound=0;fishTotal=0;showScreen("screen-fishing-game");resetLance();}); });
 
 function resetLance(){
     if(fishRound>=5){showToast(`¡Jornada terminada! +${fishTotal} pts`,3000);updateScore(fishTotal);showScreen("screen-fishing-home");fishState="idle";return;}

@@ -13,8 +13,13 @@ function showScreen(id){document.querySelectorAll(".screen").forEach(s=>s.classL
 const baseUrl = "https://sensed-production.up.railway.app/api/auth";
 let isLoginMode = true;
 let currentUser = null;
+
+// Si ya hay sesión guardada, ir directo al juego sin pedir login
 const saved = localStorage.getItem("sensed_user");
-if (saved) { currentUser = JSON.parse(saved); }
+if (saved) {
+    currentUser = JSON.parse(saved);
+    showScreen("screen-time-home");
+}
 
 function showAuthIfNeeded(onSuccess) {
     if (currentUser) { onSuccess(); return; }
@@ -53,18 +58,16 @@ if (btnSubmit) btnSubmit.addEventListener("click", async e => {
 const btnGuest = $("btn-guest");
 if (btnGuest) btnGuest.addEventListener("click", () => {
     currentUser = { username: "Invitado_" + rand(1000, 9999), isGuest: true };
+    localStorage.setItem("sensed_user", JSON.stringify(currentUser));
     showScreen("screen-time-home");
     if (window._authCallback) { window._authCallback(); window._authCallback = null; }
 });
 // ── FIN AUTH ──────────────────────────────────────────
 
+
 let timeTarget=0,timeStart=0,timeState="waiting",timeTimeout,timeRound=0,timeTotal=0;
 
-$("btn-time-start").addEventListener("click",()=>{
-    showAuthIfNeeded(() => {
-        timeRound=0;timeTotal=0;showScreen("screen-time-game");initRound();
-    });
-});
+$("btn-time-start").addEventListener("click",()=>{ showAuthIfNeeded(()=>{timeRound=0;timeTotal=0;showScreen("screen-time-game");initRound();}); });
 
 function initRound(){
     if(timeRound>=5){showToast(`¡Terminado! +${timeTotal} pts`,3000);updateScore(timeTotal);showScreen("screen-time-home");return;}
