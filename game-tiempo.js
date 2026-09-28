@@ -7,67 +7,19 @@ let score = parseInt(localStorage.getItem('sensed_time_score')||'0');
 const updateScore=(add=0)=>{score+=add;localStorage.setItem('sensed_time_score',score);if($("nav-score"))$("nav-score").textContent=score+" pts";};
 updateScore();
 
-function showScreen(id){document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));const t=$(id);if(t)t.classList.add("active");}
-
-// ── AUTH ──────────────────────────────────────────────
-const baseUrl = "https://sensed-production.up.railway.app/api/auth";
-let isLoginMode = true;
 let currentUser = null;
 
-// Si ya hay sesión guardada, ir directo al juego sin pedir login
+function showScreen(id){document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));const t=$(id);if(t)t.classList.add("active");}
+
+// ── AUTH: si no hay sesión activa, volver a index ──────
 const saved = localStorage.getItem("sensed_user");
-if (saved) {
-    currentUser = JSON.parse(saved);
-    showScreen("screen-time-home");
-}
-
-function showAuthIfNeeded(onSuccess) {
-    if (currentUser) { onSuccess(); return; }
-    showScreen("screen-auth");
-    window._authCallback = onSuccess;
-}
-
-const btnToggle = $("btn-auth-toggle");
-if (btnToggle) btnToggle.addEventListener("click", e => {
-    e.preventDefault(); isLoginMode = !isLoginMode;
-    $("auth-title") && ($("auth-title").textContent = isLoginMode ? "Iniciar Sesión" : "Crear Cuenta");
-    $("btn-auth-submit").textContent = isLoginMode ? "ENTRAR" : "REGISTRARSE";
-    $("auth-toggle-text").textContent = isLoginMode ? "¿No tienes cuenta?" : "¿Ya tienes cuenta?";
-    btnToggle.textContent = isLoginMode ? "Regístrate" : "Inicia sesión";
-});
-
-const btnSubmit = $("btn-auth-submit");
-if (btnSubmit) btnSubmit.addEventListener("click", async e => {
-    e.preventDefault();
-    const u = $("auth-username").value.trim(), p = $("auth-password").value.trim();
-    if (!u || !p) { alert("Rellena todos los campos."); return; }
-    try {
-        const r = await fetch(`${baseUrl}/${isLoginMode ? "login" : "registro"}`, {
-            method: "POST", headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ username: u, password: p })
-        });
-        if (r.ok) {
-            currentUser = { username: u, isGuest: false };
-            localStorage.setItem("sensed_user", JSON.stringify(currentUser));
-            showScreen("screen-time-home");
-            if (window._authCallback) { window._authCallback(); window._authCallback = null; }
-        } else { alert("Usuario o contraseña incorrectos."); }
-    } catch { alert("Error de conexión."); }
-});
-
-const btnGuest = $("btn-guest");
-if (btnGuest) btnGuest.addEventListener("click", () => {
-    currentUser = { username: "Invitado_" + rand(1000, 9999), isGuest: true };
-    localStorage.setItem("sensed_user", JSON.stringify(currentUser));
-    showScreen("screen-time-home");
-    if (window._authCallback) { window._authCallback(); window._authCallback = null; }
-});
-// ── FIN AUTH ──────────────────────────────────────────
-
+if (!saved) { window.location.href = "/"; }
+else { currentUser = JSON.parse(saved); }
+// ───────────────────────────────────────────────────────
 
 let timeTarget=0,timeStart=0,timeState="waiting",timeTimeout,timeRound=0,timeTotal=0;
 
-$("btn-time-start").addEventListener("click",()=>{ showAuthIfNeeded(()=>{timeRound=0;timeTotal=0;showScreen("screen-time-game");initRound();}); });
+$("btn-time-start").addEventListener("click",()=>{ timeRound=0;timeTotal=0;showScreen("screen-time-game");initRound(); });
 
 function initRound(){
     if(timeRound>=5){showToast(`¡Terminado! +${timeTotal} pts`,3000);updateScore(timeTotal);showScreen("screen-time-home");return;}

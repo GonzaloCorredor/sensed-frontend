@@ -1,4 +1,10 @@
 "use strict";
+
+// ── AUTH: si no hay sesión, volver a index ──
+const savedSession = localStorage.getItem("sensed_user");
+if (!savedSession) { window.location.href = "/"; }
+else { currentUser = JSON.parse(savedSession); }
+// ─────────────────────────────────────────────
 const $ = id => document.getElementById(id);
 const rand = (a,b) => Math.floor(Math.random()*(b-a+1))+a;
 const showToast = (msg, d=2200) => { const t=$("toast"); if(t){t.textContent=msg;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),d);} };
@@ -9,8 +15,6 @@ const updateScore = (add=0) => { score+=add; localStorage.setItem('sensed_color_
 updateScore();
 
 // Auth
-const baseUrl = "https://sensed-production.up.railway.app/api/auth";
-let isLoginMode = true;
 let currentUser = null;
 
 function showScreen(id) {
@@ -21,33 +25,6 @@ function showScreen(id) {
 // Detectar si hay sesión guardada
 const saved = localStorage.getItem('sensed_user');
 if(saved) { currentUser = JSON.parse(saved); showScreen("screen-home"); }
-
-const btnToggle = $("btn-auth-toggle");
-if(btnToggle) btnToggle.addEventListener("click", e => {
-    e.preventDefault(); isLoginMode=!isLoginMode;
-    $("auth-title") && ($("auth-title").textContent = isLoginMode?"Iniciar Sesión":"Crear Cuenta");
-    $("btn-auth-submit").textContent = isLoginMode?"ENTRAR":"REGISTRARSE";
-    $("auth-toggle-text").textContent = isLoginMode?"¿No tienes cuenta?":"¿Ya tienes cuenta?";
-    btnToggle.textContent = isLoginMode?"Regístrate":"Inicia sesión";
-});
-
-const btnSubmit = $("btn-auth-submit");
-if(btnSubmit) btnSubmit.addEventListener("click", async e => {
-    e.preventDefault();
-    const u=$("auth-username").value.trim(), p=$("auth-password").value.trim();
-    if(!u||!p){alert("Rellena todos los campos.");return;}
-    try{
-        const r=await fetch(`${baseUrl}/${isLoginMode?"login":"registro"}`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({username:u,password:p})});
-        if(r.ok){currentUser={username:u,isGuest:false};localStorage.setItem('sensed_user',JSON.stringify(currentUser));showScreen("screen-home");}
-        else alert("Usuario o contraseña incorrectos.");
-    }catch{alert("Error de conexión.");}
-});
-
-const btnGuest = $("btn-guest");
-if(btnGuest) btnGuest.addEventListener("click",()=>{
-    currentUser={username:"Invitado_"+rand(1000,9999),isGuest:true};
-    showScreen("screen-home");
-});
 
 // Juego
 const state={colors:[],idx:0,scores:[],total:0,timer:null};
@@ -62,7 +39,7 @@ function updatePreview(){const b=$("color-preview-box");if(b)b.style.backgroundC
 function getGuess(){return{h:+$("slider-h").value,s:+$("slider-s").value,l:+$("slider-l").value};}
 
 $("btn-start").addEventListener("click",()=>{
-    if(!currentUser){showScreen("screen-auth");return;}
+    
     state.colors=Array.from({length:5},randomColor);
     state.idx=0;state.scores=[];state.total=0;
     doMemorize();

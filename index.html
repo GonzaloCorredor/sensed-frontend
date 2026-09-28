@@ -13,95 +13,315 @@
   <link rel="stylesheet" href="style.css"/>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8996240781633351" crossorigin="anonymous"></script>
   <style>
-    .home-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;max-width:560px;margin:2rem auto 0;}
-    .game-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;text-decoration:none;display:flex;flex-direction:column;gap:0.6rem;transition:border-color .2s,transform .2s;}
-    .game-card:hover{border-color:var(--accent);transform:translateY(-2px);}
-    .game-card-icon{font-size:2rem;}
-    .game-card-title{font-family:var(--mono);font-size:1rem;font-weight:700;color:var(--text);}
-    .game-card-desc{font-size:0.82rem;color:var(--text3);line-height:1.5;}
-    .game-card-cta{margin-top:auto;font-family:var(--mono);font-size:0.78rem;color:var(--accent);}
-    .hero{max-width:560px;margin:3rem auto 0;padding:0 1.5rem;}
-    .hero h1{font-size:clamp(2rem,7vw,3.5rem);font-weight:700;letter-spacing:-.03em;color:var(--text);}
-    .hero p{color:var(--text2);font-size:1rem;line-height:1.7;margin-top:1rem;}
-    .site-footer{margin-top:auto;padding:2rem 1.5rem;border-top:1px solid var(--border);text-align:center;font-family:var(--mono);font-size:.75rem;color:var(--text3);}
-    .site-footer a{color:var(--text3);text-decoration:none;margin:0 .5rem;}
-    .site-footer a:hover{color:var(--accent);}
-    @media(max-width:500px){.home-grid{grid-template-columns:1fr;}}
+    /* Layout general */
+    body { display:flex; flex-direction:column; min-height:100dvh; }
+
+    /* Sección auth */
+    #section-auth {
+      display:flex; flex-direction:column; align-items:center;
+      justify-content:center; flex:1; padding:2rem 1.5rem;
+    }
+    .auth-box {
+      width:100%; max-width:380px;
+      background:var(--bg2); border:1px solid var(--border);
+      border-radius:var(--radius); padding:2rem;
+    }
+    .auth-box h1 {
+      font-family:var(--mono); font-size:1.8rem; font-weight:700;
+      color:var(--accent); text-align:center; margin-bottom:.3rem;
+    }
+    .auth-box .auth-subtitle {
+      text-align:center; color:var(--text3); font-size:.85rem;
+      margin-bottom:1.8rem; line-height:1.5;
+    }
+    .auth-input {
+      width:100%; padding:.9rem 1rem; margin-bottom:.8rem;
+      border-radius:8px; border:1px solid var(--border2);
+      background:var(--bg); color:var(--text);
+      font-family:var(--sans); font-size:.95rem;
+    }
+    .auth-input:focus { outline:none; border-color:var(--accent); }
+    .auth-divider {
+      text-align:center; color:var(--text3); font-size:.8rem;
+      margin:.8rem 0; position:relative;
+    }
+    .auth-divider::before, .auth-divider::after {
+      content:''; position:absolute; top:50%; width:42%; height:1px;
+      background:var(--border);
+    }
+    .auth-divider::before { left:0; }
+    .auth-divider::after { right:0; }
+    .btn-guest-style {
+      width:100%; padding:.9rem; border-radius:8px;
+      border:1px solid var(--border2); background:transparent;
+      color:var(--text2); font-family:var(--mono); font-size:.9rem;
+      font-weight:700; cursor:pointer; transition:border-color .2s;
+    }
+    .btn-guest-style:hover { border-color:var(--accent); color:var(--accent); }
+    .auth-toggle {
+      text-align:center; margin-top:1.2rem;
+      color:var(--text3); font-size:.85rem;
+    }
+    .auth-toggle a { color:var(--accent); text-decoration:none; font-weight:700; }
+    .auth-privacy {
+      text-align:center; margin-top:1.2rem;
+      color:var(--text3); font-size:.75rem; line-height:1.6;
+    }
+    .auth-privacy a { color:var(--text3); text-decoration:underline; }
+
+    /* Sección home (juegos) */
+    #section-home { display:none; flex:1; flex-direction:column; }
+    #section-home.visible { display:flex; }
+
+    /* Nav */
+    .nav-user {
+      font-family:var(--mono); font-size:.8rem; color:var(--text3);
+      display:flex; align-items:center; gap:.6rem;
+    }
+    .btn-logout {
+      background:none; border:1px solid var(--border); border-radius:999px;
+      color:var(--text3); font-family:var(--mono); font-size:.72rem;
+      padding:.25rem .7rem; cursor:pointer;
+    }
+    .btn-logout:hover { border-color:var(--danger); color:var(--danger); }
+
+    /* Grid de juegos */
+    .home-grid {
+      display:grid; grid-template-columns:repeat(2,1fr);
+      gap:1rem; max-width:560px; margin:2rem auto 0; padding:0 1.5rem;
+    }
+    .game-card {
+      background:var(--bg2); border:1px solid var(--border);
+      border-radius:var(--radius); padding:1.5rem; text-decoration:none;
+      display:flex; flex-direction:column; gap:.6rem;
+      transition:border-color .2s, transform .2s;
+    }
+    .game-card:hover { border-color:var(--accent); transform:translateY(-2px); }
+    .game-card-icon { font-size:2rem; }
+    .game-card-title { font-family:var(--mono); font-size:1rem; font-weight:700; color:var(--text); }
+    .game-card-desc { font-size:.82rem; color:var(--text3); line-height:1.5; }
+    .game-card-cta { margin-top:auto; font-family:var(--mono); font-size:.78rem; color:var(--accent); }
+
+    .site-footer {
+      margin-top:auto; padding:2rem 1.5rem;
+      border-top:1px solid var(--border); text-align:center;
+      font-family:var(--mono); font-size:.75rem; color:var(--text3);
+    }
+    .site-footer a { color:var(--text3); text-decoration:none; margin:0 .4rem; }
+    .site-footer a:hover { color:var(--accent); }
+
+    @media(max-width:500px) { .home-grid { grid-template-columns:1fr; } }
   </style>
 </head>
-<body style="display:flex;flex-direction:column;min-height:100dvh;">
+<body>
 
-  <nav class="nav">
+  <!-- NAV (siempre visible) -->
+  <nav class="nav" id="main-nav">
     <a href="/" class="nav-logo">sensed</a>
-    <div style="display:flex;gap:.5rem;">
-      <a href="/sobre.html" style="font-family:var(--mono);font-size:.8rem;color:var(--text3);text-decoration:none;padding:.4rem .8rem;border-radius:999px;border:1px solid var(--border);">sobre</a>
+    <div id="nav-right" class="nav-user" style="display:none;">
+      <span id="nav-username"></span>
+      <button class="btn-logout" id="btn-logout">salir</button>
     </div>
   </nav>
 
-  <main style="flex:1;">
-    <div class="hero">
-      <h1>Entrena tus sentidos</h1>
-      <p>Sensed es una plataforma gratuita de minijuegos diseñados para medir y mejorar tu percepción visual, auditiva y temporal. Sin instalación, sin registro obligatorio. Elige un modo y empieza.</p>
+  <!-- ===== SECCIÓN AUTH ===== -->
+  <section id="section-auth">
+    <div class="auth-box">
+      <h1>sensed</h1>
+      <p class="auth-subtitle">Entrena tu percepción visual, auditiva y temporal</p>
+
+      <h2 id="auth-title" style="color:var(--text);font-size:1rem;margin-bottom:1.2rem;text-align:center;">Iniciar sesión</h2>
+
+      <input class="auth-input" type="text" id="auth-username" placeholder="Nombre de usuario" autocomplete="username"/>
+      <input class="auth-input" type="password" id="auth-password" placeholder="Contraseña" autocomplete="current-password"/>
+
+      <button class="btn-start" id="btn-auth-submit" style="width:100%;margin-bottom:.5rem;">ENTRAR</button>
+
+      <div class="auth-divider">o</div>
+
+      <button class="btn-guest-style" id="btn-guest">ENTRAR COMO INVITADO</button>
+
+      <div class="auth-toggle">
+        <span id="auth-toggle-text">¿No tienes cuenta?</span>
+        <a href="#" id="btn-auth-toggle">Regístrate</a>
+      </div>
+
+      <p class="auth-privacy">
+        Al entrar aceptas nuestra
+        <a href="/privacidad.html" target="_blank">Política de Privacidad</a>
+        y el <a href="/aviso-legal.html" target="_blank">Aviso Legal</a>.
+        Este sitio utiliza cookies de Google AdSense.
+      </p>
     </div>
 
-    <div class="home-grid" style="padding:0 1.5rem;">
-      <a class="game-card" href="/color.html">
-        <div class="game-card-icon">🎨</div>
-        <div class="game-card-title">Color</div>
-        <div class="game-card-desc">Memoriza un tono y reprodúcelo con los deslizadores HSL. Pon a prueba tu memoria cromática en 5 rondas.</div>
-        <div class="game-card-cta">Jugar →</div>
-      </a>
-      <a class="game-card" href="/sonido.html">
-        <div class="game-card-icon">🎵</div>
-        <div class="game-card-title">Sonido</div>
-        <div class="game-card-desc">Escucha una frecuencia y afínala con el deslizador. ¿Tienes oído absoluto?</div>
-        <div class="game-card-cta">Jugar →</div>
-      </a>
-      <a class="game-card" href="/tiempo.html">
-        <div class="game-card-icon">⏱️</div>
-        <div class="game-card-title">Tiempo</div>
-        <div class="game-card-desc">Detén el cronómetro exactamente en el tiempo indicado sin mirar ningún reloj.</div>
-        <div class="game-card-cta">Jugar →</div>
-      </a>
-      <a class="game-card" href="/pesca.html">
-        <div class="game-card-icon">🎣</div>
-        <div class="game-card-title">Pesca</div>
-        <div class="game-card-desc">Reacciona a la picada lo más rápido posible. Cuanto mejores sean tus reflejos, mayor será la captura.</div>
-        <div class="game-card-cta">Jugar →</div>
-      </a>
-    </div>
-
-    <div style="max-width:560px;margin:3rem auto 0;padding:0 1.5rem;">
-      <h2 style="color:var(--text);font-size:1.1rem;margin-bottom:1rem;">¿Por qué entrenar la percepción?</h2>
+    <!-- Contenido SEO visible para Google incluso sin JS -->
+    <div style="max-width:560px;margin:3rem auto 0;padding:0 1.5rem;text-align:left;">
+      <h2 style="color:var(--text);font-size:1.1rem;margin-bottom:1rem;">Entrenamiento sensorial gratuito</h2>
       <p style="color:var(--text2);font-size:.93rem;line-height:1.75;">
-        La percepción sensorial no es una capacidad fija. Mejora con la práctica deliberada, igual que cualquier habilidad cognitiva. Los músicos afinan el oído entrenando de forma sistemática. Los diseñadores desarrollan sensibilidad cromática comparando colores a diario. Los deportistas de alto rendimiento calibran su sentido del tiempo con repetición. Sensed lleva estos principios de entrenamiento profesional a sesiones de pocos minutos, accesibles para cualquier persona.
+        Sensed es una plataforma de minijuegos diseñados para medir y mejorar tu percepción visual, auditiva y temporal.
+        El modo <strong>Color</strong> entrena la memoria cromática. El modo <strong>Sonido</strong> desarrolla el oído absoluto.
+        El modo <strong>Tiempo</strong> calibra tu sentido interno de la duración. El modo <strong>Pesca</strong> mide tu velocidad de reacción.
       </p>
       <p style="color:var(--text2);font-size:.93rem;line-height:1.75;margin-top:1rem;">
-        Cada modo de juego produce una puntuación basada exclusivamente en la precisión de tu respuesta. Esto la convierte en una métrica útil para seguir tu progreso a lo largo del tiempo, no en un número arbitrario.
+        La percepción sensorial mejora con la práctica deliberada, igual que cualquier habilidad cognitiva.
+        Cada partida de Sensed genera una puntuación basada exclusivamente en la precisión de tu respuesta,
+        lo que la convierte en una métrica útil para seguir tu progreso a lo largo del tiempo.
+      </p>
+      <p style="margin-top:1rem;font-size:.85rem;">
+        <a href="/sobre.html" style="color:var(--accent);">Saber más sobre Sensed →</a>
       </p>
     </div>
+  </section>
 
-    <!-- Anuncio -->
-    <div class="ad-safe-zone" style="max-width:560px;margin:2rem auto 0;padding:0 1.5rem;">
-      <ins class="adsbygoogle" style="display:block;width:100%;"
-           data-ad-client="ca-pub-8996240781633351"
-           data-ad-slot="5227166707"
-           data-ad-format="auto"
-           data-full-width-responsive="true"></ins>
-      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-    </div>
-  </main>
+  <!-- ===== SECCIÓN HOME (juegos) ===== -->
+  <section id="section-home">
+    <main style="flex:1;">
+      <div style="max-width:560px;margin:2.5rem auto 0;padding:0 1.5rem;">
+        <h1 style="font-size:clamp(1.6rem,5vw,2.5rem);font-weight:700;color:var(--text);letter-spacing:-.02em;">
+          Elige un juego
+        </h1>
+        <p style="color:var(--text2);font-size:.93rem;margin-top:.5rem;">Entrena tus sentidos. Cada ronda mejora tu puntuación.</p>
+      </div>
 
+      <div class="home-grid">
+        <a class="game-card" href="/color.html">
+          <div class="game-card-icon">🎨</div>
+          <div class="game-card-title">Color</div>
+          <div class="game-card-desc">Memoriza un tono y reprodúcelo con los deslizadores HSL. 5 rondas de memoria cromática.</div>
+          <div class="game-card-cta">Jugar →</div>
+        </a>
+        <a class="game-card" href="/sonido.html">
+          <div class="game-card-icon">🎵</div>
+          <div class="game-card-title">Sonido</div>
+          <div class="game-card-desc">Escucha una frecuencia y afínala. ¿Tienes oído absoluto?</div>
+          <div class="game-card-cta">Jugar →</div>
+        </a>
+        <a class="game-card" href="/tiempo.html">
+          <div class="game-card-icon">⏱️</div>
+          <div class="game-card-title">Tiempo</div>
+          <div class="game-card-desc">Detén el cronómetro en el segundo exacto sin mirar ningún reloj.</div>
+          <div class="game-card-cta">Jugar →</div>
+        </a>
+        <a class="game-card" href="/pesca.html">
+          <div class="game-card-icon">🎣</div>
+          <div class="game-card-title">Pesca</div>
+          <div class="game-card-desc">Reacciona a la picada lo más rápido posible para capturar peces trofeo.</div>
+          <div class="game-card-cta">Jugar →</div>
+        </a>
+      </div>
+
+      <!-- Anuncio -->
+      <div style="max-width:560px;margin:2rem auto 0;padding:0 1.5rem;">
+        <ins class="adsbygoogle" style="display:block;width:100%;"
+             data-ad-client="ca-pub-8996240781633351"
+             data-ad-slot="5227166707"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      </div>
+    </main>
+  </section>
+
+  <!-- FOOTER siempre visible -->
   <footer class="site-footer">
     <a href="/sobre.html">Sobre Sensed</a>·
-    <a href="/reglas-color.html">Reglas Color</a>·
-    <a href="/reglas-sonido.html">Reglas Sonido</a>·
-    <a href="/reglas-tiempo.html">Reglas Tiempo</a>·
-    <a href="/reglas-pesca.html">Reglas Pesca</a>·
+    <a href="/reglas-color.html">Color</a>·
+    <a href="/reglas-sonido.html">Sonido</a>·
+    <a href="/reglas-tiempo.html">Tiempo</a>·
+    <a href="/reglas-pesca.html">Pesca</a>·
     <a href="/privacidad.html">Privacidad</a>·
     <a href="/aviso-legal.html">Aviso Legal</a>·
     <a href="/contacto.html">Contacto</a>
     <div style="margin-top:.8rem;opacity:.5;">© 2026 Sensed</div>
   </footer>
+
+  <div id="toast" class="toast"></div>
+
+  <script>
+    "use strict";
+    const $ = id => document.getElementById(id);
+    const rand = (a,b) => Math.floor(Math.random()*(b-a+1))+a;
+    const showToast = (msg,d=2200) => {const t=$("toast");if(t){t.textContent=msg;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),d);}};
+
+    const baseUrl = "https://sensed-production.up.railway.app/api/auth";
+    let isLoginMode = true;
+    let currentUser = null;
+
+    function enterHome(user) {
+      currentUser = user;
+      localStorage.setItem("sensed_user", JSON.stringify(user));
+      $("section-auth").style.display = "none";
+      $("section-home").classList.add("visible");
+      $("nav-right").style.display = "flex";
+      $("nav-username").textContent = user.isGuest ? user.username : "👤 " + user.username;
+    }
+
+    function logout() {
+      localStorage.removeItem("sensed_user");
+      currentUser = null;
+      $("section-auth").style.display = "flex";
+      $("section-home").classList.remove("visible");
+      $("nav-right").style.display = "none";
+      $("auth-username").value = "";
+      $("auth-password").value = "";
+    }
+
+    // Comprobar sesión guardada al cargar
+    const saved = localStorage.getItem("sensed_user");
+    if (saved) {
+      enterHome(JSON.parse(saved));
+    }
+
+    // Toggle login/registro
+    $("btn-auth-toggle").addEventListener("click", e => {
+      e.preventDefault();
+      isLoginMode = !isLoginMode;
+      $("auth-title").textContent = isLoginMode ? "Iniciar sesión" : "Crear cuenta";
+      $("btn-auth-submit").textContent = isLoginMode ? "ENTRAR" : "REGISTRARSE";
+      $("auth-toggle-text").textContent = isLoginMode ? "¿No tienes cuenta?" : "¿Ya tienes cuenta?";
+      $("btn-auth-toggle").textContent = isLoginMode ? "Regístrate" : "Inicia sesión";
+    });
+
+    // Submit login/registro
+    $("btn-auth-submit").addEventListener("click", async e => {
+      e.preventDefault();
+      const u = $("auth-username").value.trim();
+      const p = $("auth-password").value.trim();
+      if (!u || !p) { showToast("Rellena todos los campos."); return; }
+      $("btn-auth-submit").textContent = "...";
+      $("btn-auth-submit").disabled = true;
+      try {
+        const endpoint = isLoginMode ? "login" : "registro";
+        const r = await fetch(`${baseUrl}/${endpoint}`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ username: u, password: p })
+        });
+        if (r.ok) {
+          enterHome({ username: u, isGuest: false });
+        } else {
+          showToast("Usuario o contraseña incorrectos.");
+        }
+      } catch {
+        showToast("Error de conexión. Inténtalo de nuevo.");
+      } finally {
+        $("btn-auth-submit").textContent = isLoginMode ? "ENTRAR" : "REGISTRARSE";
+        $("btn-auth-submit").disabled = false;
+      }
+    });
+
+    // Entrar como invitado
+    $("btn-guest").addEventListener("click", () => {
+      enterHome({ username: "Invitado_" + rand(1000, 9999), isGuest: true });
+    });
+
+    // Cerrar sesión
+    $("btn-logout").addEventListener("click", logout);
+
+    // Enter en los inputs
+    [$("auth-username"), $("auth-password")].forEach(el => {
+      el.addEventListener("keydown", e => { if (e.key === "Enter") $("btn-auth-submit").click(); });
+    });
+  </script>
 </body>
 </html>
