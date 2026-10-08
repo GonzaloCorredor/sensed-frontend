@@ -1,0 +1,100 @@
+"use strict";
+const $ = id => document.getElementById(id);
+const rand = (a,b) => Math.floor(Math.random()*(b-a+1))+a;
+const showToast = (msg,d=2200)=>{const t=$("toast");if(t){t.textContent=msg;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),d);}};
+
+function showScreen(id){
+    document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
+    const t=$(id); if(t) t.classList.add("active");
+}
+
+// Auth: si no hay sesión volver a index
+let currentUser = null;
+const saved = Sensed.loadSession();
+if (!saved) { window.location.href = "/"; }
+else { currentUser = saved; showScreen("screen-home"); }
+
+// Puntuación local de sesión
+let sessionScore = 0;
+const updateNav = () => { if($("nav-score")) $("nav-score").textContent = sessionScore + " pts"; };
+
+// Juego
+const state = {colors:[], idx:0, scores:[], total:0, timer:null};
+function randomColor(){ return {h:rand(0,360), s:rand(30,95), l:rand(25,75)}; }
+function hsl({h,s,l}){ return `hsl(${h},${s}%,${l}%)`; }
+function colorScore(o,g){
+    const dh=Math.min(Math.abs(o.h-g.h),360-Math.abs(o.h-g.h))/180;
+    const ds=Math.abs(o.s-g.s)/100, dl=Math.abs(o.l-g.l)/100;
+    return Math.max(0,Math.round((10-Math.sqrt(dh*dh*4+ds*ds+dl*dl)*7)*10)/10);
+}
+function getGuess(){ return {h:+$("slider-h").value,s:+$("slider-s").value,l:+$("slider-l").value}; }
+function updatePreview(){ const b=$("color-preview-box"); if(b) b.style.backgroundColor=hsl(getGuess()); }
+
+$("btn-start").addEventListener("click",()=>{
+    state.colors=Array.from({length:5},randomColor);
+    state.idx=0; state.scores=[]; state.total=0;
+    doMemorize();
+});
+
+function doMemorize(){
+    if(state.idx>=5){ doFinal(); return; }
+    $("color-round-num").textContent=state.idx+1;
+    $("color-display").style.backgroundColor=hsl(state.colors[state.idx]);
+    showScreen("screen-color-memorize");
+    const bar=$("timer-bar");
+    if(bar){bar.style.transition="none";bar.style.width="100%";
+        requestAnimationFrame(()=>requestAnimationFrame(()=>{bar.style.transition="width 4000ms linear";bar.style.width="0%";}));}
+    clearTimeout(state.timer);
+    state.timer=setTimeout(()=>doGuess(state.idx),4000);
+}
+
+function doGuess(idx){
+    $("color-guess-num").textContent=idx+1;
+    const h=rand(0,360),s=rand(20,80),l=rand(30,70);
+    $("slider-h").value=h; $("slider-s").value=s; $("slider-l").value=l;
+    $("val-h").textContent=h; $("val-s").textContent=s; $("val-l").textContent=l;
+    updatePreview(); showScreen("screen-color-guess");
+}
+
+["slider-h","slider-s","slider-l"].forEach(id=>{
+    const el=$(id); if(el) el.addEventListener("input",()=>{
+        $("val-h").textContent=$("slider-h").value;
+        $("val-s").textContent=$("slider-s").value;
+        $("val-l").textContent=$("slider-l").value;
+        updatePreview();
+    });
+});
+
+$("btn-color-confirm").addEventListener("click",()=>{
+    const orig=state.colors[state.idx],guess=getGuess(),sc=colorScore(orig,guess);
+    state.scores.push({orig,guess,sc}); state.total+=sc;
+    sessionScore+=Math.round(sc*10); updateNav();
+    $("result-original").style.backgroundColor=hsl(orig);
+    $("result-guess").style.backgroundColor=hsl(guess);
+    $("result-score-big").textContent=sc.toFixed(1);
+    $("result-comment").textContent=sc>=8?"¡Muy bien! ⚡":sc>=5?"Cerca... 🫤":"Qué lejos 💀";
+    showScreen("screen-color-result");
+});
+
+$("btn-next-color").addEventListener("click",()=>{ state.idx++; doMemorize(); });
+
+async function doFinal(){
+    const finalScore=Math.round(state.total*10);
+    $("final-score-big").textContent=finalScore;
+    $("final-grade").textContent=state.total>=40?"Ojo de artista 🎨":"Buen intento 👍";
+    const c=$("final-swatches"); if(c) c.innerHTML="";
+    state.scores.forEach(({orig,guess,sc})=>{
+        const d=document.createElement("div");
+        d.innerHTML=`<div style="display:flex;justify-content:center;gap:.5rem;align-items:center;margin-bottom:.5rem;">
+            <div style="background:${hsl(orig)};width:30px;height:30px;border-radius:4px;"></div>
+            <div style="background:${hsl(guess)};width:30px;height:30px;border-radius:4px;"></div>
+            <span style="color:var(--text);font-weight:700;">${sc.toFixed(1)}</span></div>`;
+        if(c) c.appendChild(d);
+    });
+    showScreen("screen-final");
+    // Guardar puntuación en Supabase
+    await Sensed.saveScore(currentUser, "color", finalScore);
+    if(!currentUser.isGuest) showToast("¡Puntuación guardada! 🏆", 2000);
+}
+
+$("btn-play-again").addEventListener("click",()=>showScreen("screen-home"));

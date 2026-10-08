@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reglas del juego de Color — Sensed</title>
+  <meta name="description" content="Aprende cómo funciona el modo Color de Sensed: mecánica del juego, sistema de puntuación HSL y consejos para mejorar tu memoria cromática." />
+  <link rel="icon" type="image/png" href="logo.png">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono&family=DM+Sans:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .legal-wrap { max-width: 720px; margin: 0 auto; padding: 3rem 1.5rem; color: var(--text2); line-height: 1.75; }
+    .legal-wrap h1 { color: var(--text); font-size: 2.2rem; margin-bottom: 0.5rem; }
+    .legal-wrap .subtitle { color: var(--accent); font-family: var(--mono); font-size: 0.85rem; margin-bottom: 2rem; letter-spacing: 0.05em; }
+    .legal-wrap h2 { color: var(--text); font-size: 1.25rem; margin: 2.2rem 0 0.9rem; }
+    .legal-wrap p, .legal-wrap li { font-size: 0.97rem; }
+    .legal-wrap a { color: var(--accent); }
+    .legal-back { display: inline-block; margin-bottom: 2rem; color: var(--accent); text-decoration: none; font-family: var(--mono); font-size: 0.85rem; }
+    .legal-wrap ul, .legal-wrap ol { padding-left: 1.3rem; margin: 0.8rem 0; }
+    .legal-wrap li { margin-bottom: 0.4rem; }
+    .score-table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-family: var(--mono); font-size: 0.85rem; }
+    .score-table th, .score-table td { text-align: left; padding: 0.6rem 0.8rem; border-bottom: 1px solid var(--border); }
+    .score-table th { color: var(--text); }
+    .play-cta { display: inline-block; margin-top: 2.5rem; background: var(--accent); color: #000; font-family: var(--mono); font-weight: 700; padding: 0.9rem 1.8rem; border-radius: 10px; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <div class="legal-wrap">
+    <a href="/" class="legal-back">← volver a sensed</a>
+    <h1>Reglas del juego de Color</h1>
+    <p class="subtitle">MEMORIA VISUAL Y SENSIBILIDAD CROMÁTICA</p>
+
+    <p>El modo Color de Sensed pone a prueba tu capacidad de recordar y reproducir un tono exacto a partir de memoria a corto plazo. Es uno de los retos más exigentes de la plataforma porque el cerebro humano no almacena el color de forma numérica, sino relativa y aproximada, lo que hace que reproducir un matiz preciso sea sorprendentemente difícil incluso para personas con buena percepción visual.</p>
+
+    <h2>Cómo se juega</h2>
+    <p>La partida consta de cinco rondas. En cada ronda ocurren dos fases consecutivas:</p>
+    <ol>
+      <li><strong>Fase de memorización:</strong> se te muestra un bloque de color sólido durante cuatro segundos, representado por una barra de tiempo que se vacía progresivamente. Durante este tiempo debes observar y memorizar el tono, la intensidad y la luminosidad del color mostrado.</li>
+      <li><strong>Fase de reproducción:</strong> el color desaparece y se te presentan tres deslizadores correspondientes al modelo de color HSL: Tono (H), Saturación (S) y Luminosidad (L). Debes ajustar los tres valores intentando reconstruir de memoria el color que acabas de ver, sin ninguna referencia visual del original.</li>
+    </ol>
+    <p>Al confirmar tu elección, Sensed compara matemáticamente tu reproducción con el color original y te muestra ambos colores lado a lado junto con tu puntuación de la ronda.</p>
+
+    <h2>El modelo de color HSL</h2>
+    <p>Sensed utiliza el espacio de color HSL en lugar de RGB porque se ajusta mejor a cómo el ojo humano percibe el color de forma intuitiva. El componente de Tono (Hue) representa el color puro en una rueda de 0 a 360 grados, donde 0 es rojo, 120 es verde y 240 es azul. La Saturación controla la intensidad o pureza del color, desde un gris neutro en 0% hasta un color completamente vívido en 100%. La Luminosidad determina cuánto blanco o negro se mezcla con el color, desde negro absoluto en 0% hasta blanco absoluto en 100%.</p>
+
+    <h2>Cómo se calcula la puntuación</h2>
+    <p>La puntuación de cada ronda se basa en la distancia perceptual entre tu color y el original, ponderando especialmente el error en el Tono, ya que es el componente que el ojo humano detecta con mayor sensibilidad. Una reproducción exacta otorga 10 puntos en esa ronda; cuanto mayor sea la desviación en cualquiera de los tres ejes, menor será la puntuación, hasta un mínimo de 0.</p>
+
+    <table class="score-table">
+      <tr><th>Puntuación de ronda</th><th>Valoración</th></tr>
+      <tr><td>8.0 – 10.0</td><td>Reproducción casi perfecta</td></tr>
+      <tr><td>5.0 – 7.9</td><td>Aproximación razonable</td></tr>
+      <tr><td>0.0 – 4.9</td><td>Desviación significativa</td></tr>
+    </table>
+
+    <p>Al completar las cinco rondas, las puntuaciones individuales se suman y se multiplican para obtener tu puntuación final, que queda registrada en tu marcador junto al resto de modos de juego.</p>
+
+    <h2>Consejos para mejorar</h2>
+    <ul>
+      <li>Concéntrate primero en identificar el Tono general (¿es rojo, verde, azul, un punto intermedio?) antes de afinar la saturación y la luminosidad.</li>
+      <li>Evita asociar el color con nombres comunes como "rojo" o "azul claro": estas etiquetas son demasiado imprecisas y pierden la información de matiz exacto.</li>
+      <li>Practica con regularidad. La sensibilidad cromática mejora notablemente con la repetición, igual que ocurre con el entrenamiento de oído musical.</li>
+    </ul>
+
+    <a href="/" class="play-cta">Jugar ahora →</a>
+  </div>
+</body>
+</html>

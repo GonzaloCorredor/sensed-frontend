@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+  <title>Juego de Pesca y Reflejos — Sensed</title>
+  <meta name="description" content="Pon a prueba tus reflejos con el modo Pesca de Sensed. Reacciona a la picada lo más rápido posible. Cuanto menor sea tu tiempo de reacción, mayor será la captura. 5 lances por jornada."/>
+  <link rel="icon" type="image/png" href="logo.png"/>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono&family=DM+Sans:wght@400;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8996240781633351" crossorigin="anonymous"></script>
+  <style>
+    .site-footer{padding:1.5rem;border-top:1px solid var(--border);text-align:center;font-family:var(--mono);font-size:.75rem;color:var(--text3);}
+    .site-footer a{color:var(--text3);text-decoration:none;margin:0 .4rem;}
+    .site-footer a:hover{color:var(--accent);}
+    .content-block{text-align:left;background:var(--bg2);padding:1.5rem;border-radius:8px;margin-top:2rem;border:1px solid var(--border);}
+    .content-block h2{color:var(--accent);font-size:1.2rem;margin-bottom:1rem;}
+    .content-block h3{color:var(--text);font-size:1rem;margin:1.2rem 0 .6rem;}
+    .content-block p{color:var(--text2);font-size:.93rem;line-height:1.75;margin-bottom:.9rem;}
+    .content-block ul{color:var(--text2);font-size:.93rem;line-height:1.75;padding-left:1.2rem;margin-bottom:.9rem;}
+    .content-block li{margin-bottom:.4rem;}
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <a href="/" class="nav-logo">sensed</a>
+    <div class="nav-modes">
+      <a href="/color.html"  class="nav-btn">color</a>
+      <a href="/sonido.html" class="nav-btn">sonido</a>
+      <a href="/tiempo.html" class="nav-btn">tiempo</a>
+      <a href="/pesca.html"  class="nav-btn active">pesca</a>
+    </div>
+    <div class="nav-score-display" id="nav-score">0 pts</div>
+  </nav>
+
+  <!-- HOME PESCA -->
+  <section class="screen active" id="screen-fishing-home">
+    <div class="home-content">
+      <h1 class="home-title">Jornada de Pesca</h1>
+      <button class="btn-start" id="btn-fishing-start">empezar</button>
+
+      <div class="content-block">
+        <h2>Entrenamiento de Velocidad de Reacción</h2>
+        <p>El modo Pesca de Sensed está construido alrededor de una de las métricas más estudiadas en psicología experimental y ciencias del deporte: el <strong>tiempo de reacción simple</strong>. Se trata de la rapidez con la que el sistema nervioso detecta un estímulo visual inesperado y genera una respuesta motora, en este caso pulsar un botón. Esta habilidad es fundamental en deportes de raqueta, artes marciales, conducción deportiva y cualquier disciplina donde la anticipación no es suficiente y la reacción pura marca la diferencia.</p>
+        <p>La mecánica del juego simula una jornada de pesca real: lanzas la caña, esperas con atención sostenida durante un tiempo aleatorio y, en el instante en que el pez pica, debes clavar el anzuelo lo más rápido posible. La calidad de tu captura depende directamente de cuántos milisegundos tardas en reaccionar.</p>
+
+        <h3>¿Cómo funciona el juego?</h3>
+        <p>Cada jornada consta de cinco lances. Al pulsar "Lanzar caña", el botón entra en estado de espera durante un periodo aleatorio de entre 2 y 6 segundos. Debes mantenerte atento sin distraerte, porque en un momento impredecible el botón cambiará bruscamente de color y mostrará el aviso de picada. En ese instante debes reaccionar y pulsarlo lo más rápido posible.</p>
+        <p>Si pulsas el botón antes de que aparezca la señal de picada, el lance se considera fallido por anticipación: igual que en pesca real, un tirón prematuro de la caña antes de que el pez haya mordido el anzuelo no logra capturar nada. La paciencia es parte del reto.</p>
+
+        <h3>Niveles de captura según tu velocidad</h3>
+        <ul>
+          <li><strong>Menos de 260 ms</strong> — Clavadón perfecto. Capturas trofeo: siluros de hasta 95 kg, carpas monumentales o lucios récord.</li>
+          <li><strong>261 a 380 ms</strong> — Buena clavada. Capturas notables: black bass, luciopercas, truchas y carpas de buen tamaño.</li>
+          <li><strong>381 a 500 ms</strong> — Por los pelos. Capturas menores: alburos, percasoles o incluso algún objeto indeseado del fondo.</li>
+          <li><strong>Más de 500 ms</strong> — El pez escapa. Sin captura.</li>
+        </ul>
+
+        <h3>Sistema de puntuación</h3>
+        <p>Las capturas trofeo otorgan 20 puntos, las notables 10 puntos y las menores 5 puntos. Un lance fallido o una reacción demasiado lenta no suman. La puntuación máxima por jornada completa de 5 lances es de 100 puntos, que se acumulan a tu marcador total de la sesión.</p>
+
+        <p><a href="/reglas-pesca.html" style="color:var(--accent);">Leer las reglas completas →</a></p>
+      </div>
+    </div>
+    <div class="ad-safe-zone">
+      <ins class="adsbygoogle" style="display:block;width:100%;" data-ad-client="ca-pub-8996240781633351" data-ad-slot="9617171573" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+  </section>
+
+  <!-- GAME PESCA -->
+  <section class="screen" id="screen-fishing-game">
+    <div class="memorize-top">
+      <span class="round-label">LANCE <span id="fishing-round-num">1</span>/5</span>
+    </div>
+    <div style="text-align:center;margin-top:2rem;">
+      <h2 style="color:var(--text3);font-size:1rem;">Tiempo de reacción:</h2>
+      <div id="fish-reaction-time" style="font-size:3rem;font-family:var(--mono);font-weight:700;color:var(--accent);margin:1rem 0;">-- ms</div>
+    </div>
+    <button class="btn-start" id="btn-fish-action" style="margin:2rem auto 0;width:100%;max-width:400px;height:150px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;background-color:#3b82f6;">
+      <span id="fish-btn-title" style="font-size:2rem;">LANZAR CAÑA</span>
+      <span id="fish-btn-sub" style="font-size:.9rem;opacity:.8;">Haz clic para lanzar</span>
+    </button>
+    <div id="fish-result-text" style="text-align:center;margin-top:2rem;font-size:1.1rem;font-weight:700;min-height:3rem;padding:0 1rem;"></div>
+  </section>
+
+  <div id="toast" class="toast"></div>
+
+  <footer class="site-footer">
+    <a href="/">Inicio</a>·
+    <a href="/sobre.html">Sobre Sensed</a>·
+    <a href="/reglas-pesca.html">Reglas Pesca</a>·
+    <a href="/privacidad.html">Privacidad</a>·
+    <a href="/aviso-legal.html">Aviso Legal</a>·
+    <a href="/contacto.html">Contacto</a>
+  </footer>
+
+  <script src="/supabase.js"></script>
+  <script src="game-pesca.js"></script>
+</body>
+</html>
