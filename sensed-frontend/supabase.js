@@ -1,94 +1,107 @@
 // ============================================================
-//  SENSED — supabase.js
-//  Archivo compartido de autenticación con Supabase
-//  Importado por index.html como <script src="supabase.js">
+//  SENSED — supabase.js  (sin confirmación de email)
 // ============================================================
 
 const SUPABASE_URL  = "https://xtphewnkhdnpzpwykgka.supabase.co";
 const SUPABASE_ANON = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh0cGhld25raGRucHpwd3lrZ2thIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTE0NTA4MzMsImV4cCI6MjEwNzAyNjgzM30.IJgoZf7GnfqeKbg6ElncDpkx6byrkfQpo0CEgLxwMOg";
 
-// ── Helpers básicos ──────────────────────────────────────────
-
-async function sbFetch(path, opts = {}) {
-    const res = await fetch(`${SUPABASE_URL}/rest/v1${path}`, {
+async function sbRequest(path, opts = {}) {
+    const token = opts.token || SUPABASE_ANON;
+    const res = await fetch(`${SUPABASE_URL}${path}`, {
         headers: {
             "apikey":        SUPABASE_ANON,
-            "Authorization": `Bearer ${SUPABASE_ANON}`,
+            "Authorization": `Bearer ${token}`,
             "Content-Type":  "application/json",
             "Prefer":        "return=representation",
-            ...opts.headers,
+            ...(opts.headers || {}),
         },
-        ...opts,
+        method:  opts.method  || "GET",
+        body:    opts.body    || undefined,
     });
     const text = await res.text();
-    return { ok: res.ok, status: res.status, data: text ? JSON.parse(text) : null };
+    const data = text ? JSON.parse(text) : null;
+    return { ok: res.ok, status: res.status, data };
 }
-
-async function sbAuth(action, email, password) {
-    const res = await fetch(`${SUPABASE_URL}/auth/v1/${action}`, {
-        method:  "POST",
-        headers: { "apikey": SUPABASE_ANON, "Content-Type": "application/json" },
-        body:    JSON.stringify({ email, password }),
-    });
-    return res.json();
-}
-
-// ── API pública ──────────────────────────────────────────────
 
 window.Sensed = {
 
-    // Registrar nuevo usuario
+    // ── Registro ─────────────────────────────────────────
     async register(username, password) {
-        // Usamos username@sensed.es como email interno
-        const email = `${username}@sensed.es`;
-        const data  = await sbAuth("signup", email, password);
-        if (data.error) return { ok: false, error: data.error.message };
+        // Email ficticio único basado en el username
+        const email = `${username.toLowerCase().replace(/[^a-z0-9]/g,"")}@sensed.es`;
 
-        // Guardar perfil con username legible
-        const userId = data.user?.id;
-        if (userId) {
-            await sbFetch("/profiles", {
-                method: "POST",
-                body:   JSON.stringify({ id: userId, username }),
-            });
-        }
-        return { ok: true, user: { id: userId, username, isGuest: false, token: data.access_token } };
-    },
-
-    // Iniciar sesión
-    async login(username, password) {
-        const email = `${username}@sensed.es`;
-        const data  = await sbAuth("token?grant_type=password", email, password);
-        if (data.error) return { ok: false, error: data.error.message };
-
-        const userId = data.user?.id;
-        // Obtener username del perfil
-        const prof = await sbFetch(`/profiles?id=eq.${userId}&select=username`, {
-            headers: { "Authorization": `Bearer ${data.access_token}` }
+        // 1. Crear cuenta en Supabase Auth
+        const authRes = await sbRequest("/auth/v1/signup", {
+            method: "POST",
+            body: JSON.stringify({ email, password, options: { emailRedirectTo: null } }),
         });
-        const uname = prof.data?.[0]?.username || username;
-        return { ok: true, user: { id: userId, username: uname, isGuest: false, token: data.access_token } };
+
+        if (!authRes.ok || authRes.data?.error) {
+            const msg = authRes.data?.error?.message || authRes.data?.msg || "Error al registrar";
+            // Si el email ya existe, intentar login directamente
+            if (msg.includes("already") || msg.includes("registered")) {
+                return { ok: false, error: "Ese nombre de usuario ya existe." };
+            }
+            return { ok: false, error: msg };
+        }
+
+        const userId = authRes.data?.user?.id || authRes.data?.id;
+        const token  = authRes.data?.access_token;
+
+        if (!userId) return { ok: false, error: "No se pudo crear la cuenta." };
+
+        // 2. Guardar perfil con username legible
+        await sbRequest("/rest/v1/profiles", {
+            method: "POST",
+            token,
+            body: JSON.stringify({ id: userId, username }),
+        });
+
+        return { ok: true, user: { id: userId, username, isGuest: false, token } };
     },
 
-    // Guardar puntuación (solo usuarios registrados, no invitados)
+    // ── Login ─────────────────────────────────────────────
+    async login(username, password) {
+        const email = `${username.toLowerCase().replace(/[^a-z0-9]/g,"")}@sensed.es`;
+
+        const authRes = await sbRequest("/auth/v1/token?grant_type=password", {
+            method: "POST",
+            body: JSON.stringify({ email, password }),
+        });
+
+        if (!authRes.ok || authRes.data?.error) {
+            return { ok: false, error: "Usuario o contraseña incorrectos." };
+        }
+
+        const userId = authRes.data?.user?.id;
+        const token  = authRes.data?.access_token;
+
+        // Obtener username real del perfil
+        const profRes = await sbRequest(`/rest/v1/profiles?id=eq.${userId}&select=username`, { token });
+        const uname = profRes.data?.[0]?.username || username;
+
+        return { ok: true, user: { id: userId, username: uname, isGuest: false, token } };
+    },
+
+    // ── Guardar puntuación ────────────────────────────────
     async saveScore(user, game, score) {
         if (!user || user.isGuest || !user.token) return;
-        await sbFetch("/scores", {
-            method:  "POST",
-            headers: { "Authorization": `Bearer ${user.token}` },
-            body:    JSON.stringify({ user_id: user.id, username: user.username, game, score }),
+        await sbRequest("/rest/v1/scores", {
+            method: "POST",
+            token:  user.token,
+            body:   JSON.stringify({ user_id: user.id, username: user.username, game, score }),
         });
     },
 
-    // Obtener top 10 de un juego
+    // ── Top 10 de un juego ────────────────────────────────
     async getLeaderboard(game) {
-        const res = await sbFetch(
-            `/scores?game=eq.${game}&select=username,score&order=score.desc&limit=10`
+        const res = await sbRequest(
+            `/rest/v1/scores?game=eq.${game}&select=username,score&order=score.desc&limit=10`
         );
         return res.data || [];
     },
 
-    // Sesión local
+    // ── Sesión local ──────────────────────────────────────
     saveSession(user)  { localStorage.setItem("sensed_user", JSON.stringify(user)); },
     loadSession()      { const s = localStorage.getItem("sensed_user"); return s ? JSON.parse(s) : null; },
     clearSession()     { localStorage.removeItem("sensed_user"); },
