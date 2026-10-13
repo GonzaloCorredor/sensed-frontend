@@ -106,3 +106,6 @@ window.Sensed = {
     loadSession()      { const s = localStorage.getItem("sensed_user"); return s ? JSON.parse(s) : null; },
     clearSession()     { localStorage.removeItem("sensed_user"); },
 };
+
+
+// PRUEBA
