@@ -1,33 +1,63 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sobre Sensed — Entrenamiento Cognitivo</title>
-  <link rel="icon" type="image/png" href="logo.png">
-  <link href="https://fonts.googleapis.com/css2?family=Space+Mono&family=DM+Sans:wght@400;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Sensed es una plataforma gratuita de minijuegos de entrenamiento cognitivo en español. Mejora tu memoria cromática, oído absoluto, sentido del tiempo y reflejos."/>
+  <title>Sobre Sensed — Entrenamiento sensorial y cognitivo</title>
+  <link rel="icon" type="image/png" href="logo.png"/>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono&family=DM+Sans:wght@400;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
   <style>
-    .legal-wrap { max-width: 720px; margin: 0 auto; padding: 3rem 1.5rem; color: var(--text2); line-height: 1.7; }
-    .legal-wrap h1 { color: var(--text); font-size: 2rem; margin-bottom: 1.5rem; }
-    .legal-wrap h2 { color: var(--text); font-size: 1.2rem; margin: 2rem 0 0.8rem; }
-    .legal-wrap p { font-size: 0.95rem; margin-bottom: 1rem; }
-    .legal-back { display: inline-block; margin-bottom: 2rem; color: var(--accent); text-decoration: none; font-family: var(--mono); font-size: 0.85rem; }
+    .legal-wrap{max-width:720px;margin:0 auto;padding:3rem 1.5rem;color:var(--text2);line-height:1.75;}
+    .legal-wrap h1{color:var(--text);font-size:2rem;margin-bottom:1.5rem;}
+    .legal-wrap h2{color:var(--text);font-size:1.2rem;margin:2rem 0 .8rem;}
+    .legal-wrap p{font-size:.95rem;margin-bottom:.9rem;}
+    .legal-wrap a{color:var(--accent);}
+    .legal-back{display:inline-block;margin-bottom:2rem;color:var(--accent);text-decoration:none;font-family:var(--mono);font-size:.85rem;}
+    .game-links{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.2rem;}
+    .game-links a{background:var(--bg2);border:1px solid var(--border);padding:.55rem 1rem;border-radius:999px;font-family:var(--mono);font-size:.78rem;text-decoration:none;color:var(--text2);}
+    .site-footer{padding:1.5rem;border-top:1px solid var(--border);text-align:center;font-family:var(--mono);font-size:.75rem;color:var(--text3);}
+    .site-footer a{color:var(--text3);text-decoration:none;margin:0 .4rem;}
+    .site-footer a:hover{color:var(--accent);}
   </style>
 </head>
 <body>
+  <nav class="nav"><a href="/" class="nav-logo">sensed</a></nav>
   <div class="legal-wrap">
-    <a href="/" class="legal-back">← volver al inicio</a>
+    <a href="/" class="legal-back">← volver a sensed</a>
     <h1>Sobre Sensed</h1>
-    
-    <h2>El propósito de nuestra plataforma</h2>
-    <p>Sensed nace como un proyecto de desarrollo enfocado en la mejora y evaluación de las capacidades cognitivas, sensoriales y de reacción del usuario. Vivimos en un mundo donde la agilidad mental y la precisión son habilidades fundamentales, y nuestra plataforma ofrece un entorno controlado para ponerlas a prueba.</p>
-    
-    <h2>¿Qué evaluamos?</h2>
-    <p>Nuestros simuladores interactivos están diseñados mediante algoritmos matemáticos que miden el rendimiento en tiempo real. Analizamos la <strong>percepción cromática</strong> (midiendo la distancia perceptual en modelos HSL), la <strong>agudeza auditiva</strong> (frecuencias en Hercios), y el <strong>tiempo de reacción neuromuscular</strong> (medido en milisegundos).</p>
-    
-    <h2>Tecnología detrás de Sensed</h2>
-    <p>La plataforma está construida utilizando una arquitectura moderna. El frontend se basa en HTML5, CSS3 y JavaScript puro para garantizar una latencia casi nula (crucial para los test de reflejos). Todo el sistema de puntuaciones, usuarios y bases de datos es gestionado por un sólido backend desarrollado en Java y alojado en la nube, garantizando la seguridad y persistencia de los datos de nuestros jugadores.</p>
+    <p>Sensed nació de una pregunta sencilla: ¿qué tan bien conocemos realmente nuestros propios sentidos? Vemos colores todos los días sin pensar en si seríamos capaces de reproducirlos de memoria. Escuchamos música constantemente, pero pocas veces nos preguntamos si tenemos buen oído. Calculamos el tiempo de forma instintiva al cruzar una calle, sin saber lo precisos que somos en realidad. Sensed convierte estas preguntas en retos jugables, cortos y medibles.</p>
+
+    <h2>Por qué entrenar la percepción importa</h2>
+    <p>La percepción sensorial no es una capacidad fija: mejora con la práctica deliberada, igual que cualquier habilidad cognitiva. Los músicos desarrollan oído absoluto entrenando de forma sistemática. Los diseñadores gráficos afinan su sensibilidad cromática comparando colores a diario. Los deportistas de alto rendimiento dependen de un sentido del tiempo extraordinariamente calibrado. Sensed lleva estos principios de entrenamiento a sesiones de pocos minutos, accesibles para cualquier persona sin conocimientos previos.</p>
+
+    <h2>Cuatro modos de juego, cuatro sentidos</h2>
+    <p>La plataforma está organizada en cuatro modos independientes. El modo Color trabaja la memoria visual y la sensibilidad cromática. El modo Sonido entrena la afinación y el reconocimiento de frecuencias. El modo Tiempo mide y mejora tu sentido interno de la duración. El modo Pesca entrena la velocidad de reacción ante un estímulo visual repentino, una habilidad clave en deportes de reflejos y conducción.</p>
+    <div class="game-links">
+      <a href="/reglas-color.html">Reglas: Color →</a>
+      <a href="/reglas-sonido.html">Reglas: Sonido →</a>
+      <a href="/reglas-tiempo.html">Reglas: Tiempo →</a>
+      <a href="/reglas-pesca.html">Reglas: Pesca →</a>
+    </div>
+
+    <h2>¿Quién puede usar Sensed?</h2>
+    <p>Sensed está diseñado para cualquier persona curiosa sobre sus propias capacidades sensoriales. No se necesita formación musical para el modo Sonido, ni conocimientos de diseño para el Color. Basta con tener ganas de descubrir cómo funciona tu percepción y mejorarla con la práctica deliberada.</p>
+
+    <h2>¿Con qué frecuencia se recomienda jugar?</h2>
+    <p>Igual que el ejercicio físico, el entrenamiento cognitivo es más efectivo en sesiones cortas y frecuentes. Jugar entre diez y quince minutos al día, alternando los cuatro modos, es suficiente para notar mejoras en pocas semanas. La puntuación de cada partida queda guardada en tu cuenta para comparar el progreso a lo largo del tiempo.</p>
+
+    <h2>Puntuación y progreso</h2>
+    <p>Cada partida genera una puntuación basada en la precisión de tus respuestas, no en la velocidad ni en la suerte. Esto significa que la puntuación de Sensed refleja directamente tu nivel de habilidad sensorial, lo que la convierte en una métrica útil para seguir tu evolución si juegas de forma habitual.</p>
+
+    <h2>¿Es completamente gratuito?</h2>
+    <p>Sí. Sensed es completamente gratuito y no requiere descarga ni instalación. El sitio se financia mediante publicidad no intrusiva de Google AdSense. Puedes jugar como invitado sin registrarte, o crear una cuenta para guardar tus puntuaciones de forma permanente. Toda la información sobre el uso de datos está detallada en la <a href="/privacidad.html">Política de Privacidad</a>.</p>
+
+    <p>¿Tienes dudas, sugerencias o quieres reportar un problema? Visita nuestra página de <a href="/contacto.html">Contacto</a>.</p>
   </div>
+  <footer class="site-footer">
+    <a href="/">Inicio</a>·<a href="/sobre.html">Sobre Sensed</a>·<a href="/privacidad.html">Privacidad</a>·<a href="/aviso-legal.html">Aviso Legal</a>·<a href="/contacto.html">Contacto</a>
+    <div style="margin-top:.7rem;opacity:.4;">© 2026 Sensed</div>
+  </footer>
 </body>
 </html>
