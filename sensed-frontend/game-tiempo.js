@@ -7,8 +7,9 @@ function showScreen(id){document.querySelectorAll(".screen").forEach(s=>s.classL
 
 let currentUser = null;
 const saved = Sensed.loadSession();
-if (!saved) { window.location.href = "/"; }
-else { currentUser = saved; showScreen("screen-time-home"); }
+// Sin sesión: se juega como invitado temporal (sin redirección, accesible para cualquier visitante)
+currentUser = saved || { username: "Invitado_" + rand(1000, 9999), isGuest: true, token: null };
+showScreen("screen-time-home");
 
 let sessionScore=0;
 const updateNav=()=>{if($("nav-score"))$("nav-score").textContent=sessionScore+" pts";};

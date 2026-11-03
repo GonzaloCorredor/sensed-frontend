@@ -11,8 +11,9 @@ function showScreen(id){
 // Auth: si no hay sesión volver a index
 let currentUser = null;
 const saved = Sensed.loadSession();
-if (!saved) { window.location.href = "/"; }
-else { currentUser = saved; showScreen("screen-home"); }
+// Sin sesión: se juega como invitado temporal (sin redirección, accesible para cualquier visitante)
+currentUser = saved || { username: "Invitado_" + rand(1000, 9999), isGuest: true, token: null };
+showScreen("screen-home");
 
 // Puntuación local de sesión
 let sessionScore = 0;
